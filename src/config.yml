@@ -1,0 +1,32 @@
+# 是否启用禁止放置
+denyplace: false
+# 禁止放置列表
+place:
+  - DIAMOND_ORE
+  - RESTONR_ORE
+  - NETHER_QUARTZ_ORE
+  - EMERALD_ORE
+  - LAPIS_ORE
+  - GOLD_ORE
+  - IRON_ORE
+  - COAL_ORE
+# 禁止破坏列表
+break:
+  - DIAMOND_ORE
+  - RESTONR_ORE
+  - NETHER_QUARTZ_ORE
+  - EMERALD_ORE
+  - LAPIS_ORE
+  - GOLD_ORE
+  - IRON_ORE
+  - COAL_ORE
+# 破坏上述方块后,替换为指定方块
+replace: false
+# 破坏位置的石头是否逐层恢复
+replacerestore: true
+# 替换的方块,默认为石头
+replaceblock: STONE
+# 破坏方块后不掉落物品，而直接放入背包
+directgetitem: false
+# 单位(秒),30秒后方块自动恢复
+delay: 30
