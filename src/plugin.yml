@@ -3,6 +3,7 @@ author: icestar
 version: 1.5
 main: org.sct.BlockRestore.Main
 description: 方块复原
+api-version: 1.13
 commands:
   blr:
     description: 插件主命令

@@ -38,8 +38,8 @@ public class BlockBreak implements Listener {
                 }
                 location.add(lt);
                 lt_mr.put(lt, mr);//存进破坏前的原始方块类型
-                event.getPlayer().sendMessage(String.valueOf(lt));//debug信息
-                event.getPlayer().sendMessage(String.valueOf(System.currentTimeMillis()/1000));//debug信息
+                //event.getPlayer().sendMessage(String.valueOf(lt));//debug信息
+                //event.getPlayer().sendMessage(String.valueOf(System.currentTimeMillis()/1000));//debug信息
                 lt_time.put(lt,System.currentTimeMillis()/1000);//存入破坏时的时间
             }
         }

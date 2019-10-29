@@ -1,10 +1,14 @@
 package org.sct.BlockRestore;
 
 import org.bukkit.Bukkit;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.sct.BlockRestore.commands.blr;
+import org.sct.BlockRestore.listener.AsyncPlayerChat;
 import org.sct.BlockRestore.listener.BlockBreak;
 import org.sct.BlockRestore.listener.BlockPlace;
+import org.sct.BlockRestore.listener.InventoryClick;
+import org.sct.BlockRestore.updater.update;
 
 import static org.sct.BlockRestore.Manager.StaticManager.*;
 
@@ -15,6 +19,9 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         Instance = this;
         initialize();
+        registerEvents();
+        Thread check = new Thread(new update());
+        check.run();
         getServer().getConsoleSender().sendMessage("§7[§eBlockRestore§7]§2插件已加载");
     }
 
@@ -31,10 +38,15 @@ public class Main extends JavaPlugin {
         directgetitem = getConfig().getBoolean("directgetitem");
         denyplace = getConfig().getBoolean("denyplace");
         Bukkit.getPluginCommand("blr").setExecutor(new blr());
-        Bukkit.getPluginManager().registerEvents(new BlockPlace(),this);
-        Bukkit.getPluginManager().registerEvents(new BlockBreak(),this);
         placelist = getConfig().getStringList("place");
         breaklist = getConfig().getStringList("break");
+    }
+
+    private void registerEvents() {
+        Listener listener[] = {new BlockBreak(),new BlockPlace(),new InventoryClick(),new AsyncPlayerChat()};
+        for (Listener Listener : listener) {
+            Bukkit.getPluginManager().registerEvents(Listener,this);
+        }
     }
 
 }

@@ -4,7 +4,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
+import org.sct.BlockRestore.GUI.main;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,10 @@ public class blr implements CommandExecutor,TabCompleter {
                 } else {
                     sender.sendMessage("§7[§eBlockRestore§7]§c你没有此命令的权限");
                 }
+                return true;
+            } else if (args.length == 1 && args[0].equalsIgnoreCase("gui")) {
+                main main = new main();
+                main.openInventory((Player) sender);
                 return true;
             }
 

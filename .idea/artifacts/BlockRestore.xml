@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="BlockRestore">
-    <output-path>$PROJECT_DIR$/..</output-path>
+    <output-path>$USER_HOME$/Desktop</output-path>
     <root id="archive" name="BlockRestore.jar">
       <element id="module-output" name="BlockRestore" />
     </root>
