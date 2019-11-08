@@ -33,6 +33,7 @@ public class Main extends JavaPlugin {
     public void initialize() {
         saveDefaultConfig();
         reloadConfig();
+        readconfig();
         replace = getConfig().getBoolean("replace");
         replacerestore = getConfig().getBoolean("replacestore");
         directgetitem = getConfig().getBoolean("directgetitem");
@@ -46,6 +47,15 @@ public class Main extends JavaPlugin {
         Listener listener[] = {new BlockBreak(),new BlockPlace(),new InventoryClick(),new AsyncPlayerChat()};
         for (Listener Listener : listener) {
             Bukkit.getPluginManager().registerEvents(Listener,this);
+        }
+    }
+
+    private void readconfig() {
+        if (getConfig().getConfigurationSection("blocks") == null) return;
+        for (String block : getConfig().getConfigurationSection("blocks").getKeys(true)) {
+            if (!block.contains(".")) {
+                blocklist.add(block);
+            }
         }
     }
 

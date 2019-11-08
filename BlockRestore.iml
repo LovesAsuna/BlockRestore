@@ -19,11 +19,11 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://E:/work/1.14.4test/spigot.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../1.14.4test/spigot.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://E:/work/1.14.4test/spigot.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../1.14.4test/spigot.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>

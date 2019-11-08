@@ -13,6 +13,7 @@ import static org.sct.BlockRestore.Manager.StaticManager.*;
 
 public class AsyncPlayerChat implements Listener {
     public static Material inputmr;
+    private blocksetup blocksetup;
 
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent e) {
@@ -28,7 +29,8 @@ public class AsyncPlayerChat implements Listener {
                 } else {
                     player_chat.remove(player);
                     Bukkit.getScheduler().runTaskLater(getInstance(),()->{
-                        new blocksetup().openinv(player,e.getMessage());
+                        blocksetup = new blocksetup();
+                        blocksetup.openinv(player,e.getMessage());
                     },0L);
                 }
                 e.setCancelled(true);
@@ -46,9 +48,24 @@ public class AsyncPlayerChat implements Listener {
                 } else {
                     player_chat_2.remove(player);
                     Bukkit.getScheduler().runTaskLater(getInstance(),()->{
-                        new blocksetup().openinv_2(player,e.getMessage());
+                        blocksetup.openinv_2(player,e.getMessage());
                     },0L);
                 }
+                e.setCancelled(true);
+            }
+        }
+
+        if (player_time.get(player) != null && player_time.get(player)) {//启动了聊天抑制2
+            if (e.getMessage().equalsIgnoreCase("cancel")) {
+                player_time.remove(player);
+                return;
+            } else {
+                if (Integer.valueOf(e.getMessage()) != null) {
+                    time = Integer.valueOf(e.getMessage());
+                }
+                Bukkit.getScheduler().runTaskLater(getInstance(),()->{
+                    blocksetup.openinv_3(player);
+                },0L);
                 e.setCancelled(true);
             }
         }
