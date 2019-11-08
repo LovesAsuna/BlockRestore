@@ -37,9 +37,9 @@ public class AsyncPlayerChat implements Listener {
                             blocksetup.openinv(player,e.getMessage());
                             player_int.remove(player);
                         } else if (player_int.get(player) == 2){
-                            blocksetup.openinv_2(player,e.getMessage());
+                            blocksetup.openinv_modifyblock(player,e.getMessage());
                         } else {
-                            blocksetup.openinv_3(player);
+                            blocksetup.openinv_modifytime(player);
                         }
                     },0L);
                 }

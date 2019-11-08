@@ -12,7 +12,6 @@ import org.sct.BlockRestore.listener.guilistener.invblocksetup;
 import org.sct.BlockRestore.listener.guilistener.invmain;
 import org.sct.BlockRestore.listener.guilistener.modify;
 import org.sct.BlockRestore.updater.update;
-
 import java.util.ArrayList;
 
 public class Main extends JavaPlugin {

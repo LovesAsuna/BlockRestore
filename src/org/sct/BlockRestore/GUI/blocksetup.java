@@ -65,7 +65,7 @@ public class blocksetup {
         openInventory(player);
     }
 
-    public void openinv_2(Player player, String replace) {
+    public void openinv_modifyblock(Player player, String replace) {
         ItemStack it = new ItemStack(Material.getMaterial(replace));
         ItemMeta itm = it.getItemMeta();
         itm.setDisplayName("§b替换的方块类型");
@@ -75,7 +75,7 @@ public class blocksetup {
         openInventory(player);
     }
 
-    public void openinv_3(Player player) {
+    public void openinv_modifytime(Player player) {
         ItemStack it = blocksetup.getItem(15);
         ItemMeta itm = it.getItemMeta();
         itm.setDisplayName("§a恢复时长(" + time + "秒)");
