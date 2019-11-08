@@ -6,14 +6,17 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.inventory.ItemStack;
 import org.sct.BlockRestore.GUI.blocksetup;
+import java.util.HashMap;
 
-import static org.sct.BlockRestore.Manager.StaticManager.*;
+import static org.sct.BlockRestore.Main.variableManager;
+import static org.sct.BlockRestore.Manager.VariableManager.*;
 
 public class AsyncPlayerChat implements Listener {
-    public static Material inputmr;
-    private blocksetup blocksetup;
+    private HashMap<Player,Boolean> player_chat = variableManager.getplayer_chat();
+    private HashMap<Player,Integer> player_int = variableManager.getplayer_int();
+    private Material inputmr = variableManager.getInputmr();
+    private blocksetup blocksetup = new blocksetup();
 
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent e) {
@@ -21,6 +24,7 @@ public class AsyncPlayerChat implements Listener {
         if (player_chat.get(player) != null && player_chat.get(player) ) {//启动了聊天抑制
             if (e.getMessage().equalsIgnoreCase("cancel")) {
                 player_chat.remove(player);
+                e.setCancelled(true);
                 return;
             } else {
                 inputmr = Material.getMaterial(e.getMessage());
@@ -29,47 +33,18 @@ public class AsyncPlayerChat implements Listener {
                 } else {
                     player_chat.remove(player);
                     Bukkit.getScheduler().runTaskLater(getInstance(),()->{
-                        blocksetup = new blocksetup();
-                        blocksetup.openinv(player,e.getMessage());
+                        if (player_int.get(player) == 1) {
+                            blocksetup.openinv(player,e.getMessage());
+                            player_int.remove(player);
+                        } else if (player_int.get(player) == 2){
+                            blocksetup.openinv_2(player,e.getMessage());
+                        } else {
+                            blocksetup.openinv_3(player);
+                        }
                     },0L);
                 }
-                e.setCancelled(true);
-            }
-        }
-
-        if (player_chat_2.get(player) != null && player_chat_2.get(player)) {//启动了聊天抑制2
-            if (e.getMessage().equalsIgnoreCase("cancel")) {
-                player_chat_2.remove(player);
-                return;
-            } else {
-                inputmr = Material.getMaterial(e.getMessage());
-                if (inputmr == null) {//判断输入是否有效
-                    player.sendMessage("§c你输入的命名空间有误,请重新输入!");
-                } else {
-                    player_chat_2.remove(player);
-                    Bukkit.getScheduler().runTaskLater(getInstance(),()->{
-                        blocksetup.openinv_2(player,e.getMessage());
-                    },0L);
-                }
-                e.setCancelled(true);
-            }
-        }
-
-        if (player_time.get(player) != null && player_time.get(player)) {//启动了聊天抑制2
-            if (e.getMessage().equalsIgnoreCase("cancel")) {
-                player_time.remove(player);
-                return;
-            } else {
-                if (Integer.valueOf(e.getMessage()) != null) {
-                    time = Integer.valueOf(e.getMessage());
-                }
-                Bukkit.getScheduler().runTaskLater(getInstance(),()->{
-                    blocksetup.openinv_3(player);
-                },0L);
                 e.setCancelled(true);
             }
         }
     }
-
-
 }

@@ -1,35 +1,27 @@
-package org.sct.BlockRestore.listener;
+package org.sct.BlockRestore.listener.guilistener;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import java.util.HashMap;
 
-import static org.sct.BlockRestore.Manager.StaticManager.*;
+import static org.sct.BlockRestore.Main.variableManager;
+import static org.sct.BlockRestore.Manager.VariableManager.*;
 
-public class InventoryClick implements Listener {
+public class invblocksetup implements Listener {
+    private HashMap<Player,Boolean> player_chat = variableManager.getplayer_chat();
+    private HashMap<Player,Integer> player_int = variableManager.getplayer_int();
+    private Inventory blocksetup = variableManager.getBlocksetup();
+    private int time = variableManager.gettime();
+
     @EventHandler
-    public void onInventoryClick(InventoryClickEvent e) {
+    public void onInvblocksetup(InventoryClickEvent e) {
         Player player = (Player) e.getWhoClicked();
-        if (e.getWhoClicked().getOpenInventory().getTitle().equalsIgnoreCase("BlockRestore主菜单")) {
-            if (e.getRawSlot() == 12) {
-
-            }
-
-
-
-            if (e.getRawSlot() == 13) {
-                player_chat.put(player,true);
-                player.sendMessage("§b请输入添加物品的命名空间");
-                player.sendMessage("§e或输入Cancel取消添加");
-                player.closeInventory();
-            }
-            e.setCancelled(true);
-        }
-
         if (e.getWhoClicked().getOpenInventory().getTitle().contains("§bBlocksetup: §e")) {
             if (e.getRawSlot() == 10) {
                 if (blocksetup.getItem(10).getType() == Material.LIME_WOOL) {
@@ -48,7 +40,8 @@ public class InventoryClick implements Listener {
             }
 
             if (e.getRawSlot() == 11) {
-                player_chat_2.put(player,true);
+                player_chat.put(player,true);
+                player_int.put(player,2);
                 player.sendMessage("§b请输入替换物品的命名空间");
                 player.sendMessage("§e或输入Cancel取消添加");
                 player.closeInventory();
@@ -103,7 +96,8 @@ public class InventoryClick implements Listener {
             }
 
             if (e.getRawSlot() == 15) {
-                player_time.put(player,true);
+                player_chat.put(player,true);
+                player_int.put(player,3);
                 player.sendMessage("§b请输入恢复时长");
                 player.sendMessage("§e或输入Cancel取消添加");
                 player.closeInventory();

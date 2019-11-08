@@ -5,11 +5,15 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import java.util.ArrayList;
 
-import static org.sct.BlockRestore.Manager.StaticManager.*;
+import static org.sct.BlockRestore.Main.variableManager;
+import static org.sct.BlockRestore.Manager.VariableManager.getInstance;
 
 public class editor {
     private Inventory editor;
+    private ArrayList<String> blocklist = variableManager.getblocklist();
 
     public void openInventory(Player player) {
         createInventory();
@@ -28,43 +32,50 @@ public class editor {
         int num = getnum();
         System.out.println("num: " + num);
         ItemStack glass = new ItemStack(Material.LIGHT_BLUE_STAINED_GLASS_PANE);
-        if (num > 0 && num <=7) {
-            editor = Bukkit.createInventory(null,3 * 9,"Editor");
-            int slot[] = {18,19,20,21,22,23,24,25,26};
-            for (int Slot : slot) {
-                editor.setItem(Slot,glass);
-            }
-        } else if (num <= 14) {
-            editor = Bukkit.createInventory(null,4 * 9,"Editor");
-            int slot[] = {18,26,27,28,29,30,31,32,33,34,35};
-            for (int Slot : slot) {
-                editor.setItem(Slot,glass);
-            }
-        } else {
-            editor = Bukkit.createInventory(null,5 * 9,"Editor");
-            int slot[] = {18,26,27,35,36,37,38,39,40,41,42,43,44};
-            for (int Slot : slot) {
-                editor.setItem(Slot,glass);
-            }
-        }
-        int slot[] = {0,1,2,3,4,5,6,7,8,9,17};
+        editor = Bukkit.createInventory(null,5 * 9,"Editor");
+        int slot[] = {0,1,2,3,4,5,6,7,8,9,17,18,26,27,35,36,37,38,39,40,41,42,43,44};
         for (int Slot : slot) {
-            editor.setItem(Slot,glass);
+               editor.setItem(Slot, glass);
         }
 
-
-        int s=10;
+        int s = 10;
         for (String block: blocklist) {
+            if (s == 16) s = 19;
+            if (s == 25) s = 27;
             ItemStack itemStack = new ItemStack(Material.getMaterial(block));
+            ItemMeta itemMeta = itemStack.getItemMeta();
+            ArrayList<String> lore = new ArrayList<>();
+            lore.add("§breplace: " + status("blocks." + block + ".replace"));
+            lore.add("§breplaceblock: §e" + getInstance().getConfig().getString("blocks." + block + ".replaceblock"));
+            lore.add("§bdenyplace: " + status("blocks." + block + ".denyplace"));
+            lore.add("§brestore: " + status("blocks." + block + ".restore"));
+            lore.add("§bdirectgiveitem: " + status("blocks." + block + ".directgiveitem"));
+            lore.add("§brestore: §e" + getInstance().getConfig().getInt("blocks." + block + ".restoretime"));
+            itemMeta.setLore(lore);
+            itemStack.setItemMeta(itemMeta);
             editor.setItem(s,itemStack);
             s++;
-            //todo 修改s使其自动变换位置
         }
-
-
-
 
         return editor;
     }
 
+    private String status(String path) {
+        if (getInstance().getConfig().getBoolean(path)) {
+            return "§atrue";
+        } else {
+            return "§cfalse";
+        }
+    }
 }
+
+/*
+样板:
+STONE:
+    replace: true
+    replaceblock: GLASS
+    denyplace: false
+    restore: true
+    directgiveitem: true
+    restoretime: 1
+ */

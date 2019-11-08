@@ -12,7 +12,7 @@ import org.sct.BlockRestore.GUI.main;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.sct.BlockRestore.Manager.StaticManager.*;
+import static org.sct.BlockRestore.Manager.VariableManager.*;
 
 public class blr implements CommandExecutor,TabCompleter {
     @Override

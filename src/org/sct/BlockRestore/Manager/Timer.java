@@ -4,9 +4,19 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 
-import static org.sct.BlockRestore.Manager.StaticManager.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+import static org.sct.BlockRestore.Main.variableManager;
+import static org.sct.BlockRestore.Manager.VariableManager.getInstance;
 
 public class Timer {
+    private CopyOnWriteArrayList<Location> location = variableManager.getlocation();
+    private HashMap<Location,Material> lt_mr = variableManager.getlt_mr();
+    private ArrayList<String> blocklist = variableManager.getblocklist();
+    private HashMap<Location,Long> lt_time = variableManager.getlt_time();
+
     public void run() {
         Bukkit.getScheduler().runTaskTimer(getInstance(),()->{
             Long nowTime = System.currentTimeMillis()/1000;

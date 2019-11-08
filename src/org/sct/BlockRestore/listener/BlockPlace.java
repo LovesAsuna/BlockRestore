@@ -5,9 +5,14 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 
-import static org.sct.BlockRestore.Manager.StaticManager.*;
+import java.util.List;
+
+import static org.sct.BlockRestore.Main.variableManager;
+import static org.sct.BlockRestore.Manager.VariableManager.*;
 
 public class BlockPlace implements Listener {
+    private List<String> placelist = variableManager.getplacelist();
+
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
         for (String blockname: placelist) {

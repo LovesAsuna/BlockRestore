@@ -9,10 +9,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import static org.sct.BlockRestore.Main.variableManager;
 
-public class blocksetup {
-    private String blockname;
-    private Inventory blocksetup = variableManager.getBlocksetup();
-    private int time = variableManager.gettime();
+public class modify {
+    String blockname;
+    Inventory blocksetup = variableManager.getBlocksetup();
+    int time = variableManager.gettime();
 
     public void openInventory(Player player) {//基本容器
         int slot[] = {0, 1, 2, 3, 5, 6, 7, 8, 9, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26};
@@ -83,5 +83,4 @@ public class blocksetup {
         blocksetup.setItem(15,it);
         openInventory(player);
     }
-
 }

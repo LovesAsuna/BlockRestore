@@ -8,10 +8,19 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.sct.BlockRestore.Manager.Timer;
 
-import static org.sct.BlockRestore.Manager.StaticManager.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+import static org.sct.BlockRestore.Main.*;
+import static org.sct.BlockRestore.Manager.VariableManager.*;
 
 public class BlockBreak implements Listener {
-    Timer timer;
+    private Timer timer;
+    private CopyOnWriteArrayList<Location> location = variableManager.getlocation();
+    private HashMap<Location,Material> lt_mr = variableManager.getlt_mr();
+    private ArrayList<String> blocklist = variableManager.getblocklist();
+    private HashMap<Location,Long> lt_time = variableManager.getlt_time();
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {

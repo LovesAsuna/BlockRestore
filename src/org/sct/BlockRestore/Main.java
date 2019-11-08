@@ -3,17 +3,22 @@ package org.sct.BlockRestore;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.sct.BlockRestore.Manager.VariableManager;
 import org.sct.BlockRestore.commands.blr;
 import org.sct.BlockRestore.listener.AsyncPlayerChat;
 import org.sct.BlockRestore.listener.BlockBreak;
 import org.sct.BlockRestore.listener.BlockPlace;
-import org.sct.BlockRestore.listener.InventoryClick;
+import org.sct.BlockRestore.listener.guilistener.invblocksetup;
+import org.sct.BlockRestore.listener.guilistener.invmain;
+import org.sct.BlockRestore.listener.guilistener.modify;
 import org.sct.BlockRestore.updater.update;
 
-import static org.sct.BlockRestore.Manager.StaticManager.*;
+import java.util.ArrayList;
 
 public class Main extends JavaPlugin {
     public static Main Instance;
+    public static VariableManager variableManager= new VariableManager();
+    private ArrayList<String> blocklist = variableManager.getblocklist();
 
     @Override
     public void onEnable() {
@@ -34,17 +39,12 @@ public class Main extends JavaPlugin {
         saveDefaultConfig();
         reloadConfig();
         readconfig();
-        replace = getConfig().getBoolean("replace");
-        replacerestore = getConfig().getBoolean("replacestore");
-        directgetitem = getConfig().getBoolean("directgetitem");
-        denyplace = getConfig().getBoolean("denyplace");
         Bukkit.getPluginCommand("blr").setExecutor(new blr());
-        placelist = getConfig().getStringList("place");
-        breaklist = getConfig().getStringList("break");
+
     }
 
     private void registerEvents() {
-        Listener listener[] = {new BlockBreak(),new BlockPlace(),new InventoryClick(),new AsyncPlayerChat()};
+        Listener listener[] = {new BlockBreak(),new BlockPlace(),new modify(),new AsyncPlayerChat(),new invblocksetup(),new invblocksetup(),new invmain()};
         for (Listener Listener : listener) {
             Bukkit.getPluginManager().registerEvents(Listener,this);
         }
