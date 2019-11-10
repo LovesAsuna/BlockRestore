@@ -3,14 +3,15 @@ package org.sct.BlockRestore;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.sct.BlockRestore.listener.guilistener.modifylistener;
 import org.sct.BlockRestore.manager.VariableManager;
 import org.sct.BlockRestore.commands.blr;
 import org.sct.BlockRestore.listener.AsyncPlayerChat;
 import org.sct.BlockRestore.listener.BlockBreak;
 import org.sct.BlockRestore.listener.BlockPlace;
-import org.sct.BlockRestore.listener.guilistener.invblocksetup;
-import org.sct.BlockRestore.listener.guilistener.invmain;
-import org.sct.BlockRestore.listener.guilistener.invmodify;
+import org.sct.BlockRestore.listener.guilistener.blocksetuplistener;
+import org.sct.BlockRestore.listener.guilistener.mainlistener;
+import org.sct.BlockRestore.listener.guilistener.editorlistener;
 import org.sct.BlockRestore.updater.update;
 import java.util.ArrayList;
 
@@ -43,7 +44,7 @@ public class Main extends JavaPlugin {
     }
 
     private void registerEvents() {
-        Listener listener[] = {new BlockBreak(),new BlockPlace(),new invmodify(),new AsyncPlayerChat(),new invblocksetup(),new invmain()};
+        Listener listener[] = {new BlockBreak(),new BlockPlace(),new editorlistener(),new AsyncPlayerChat(),new blocksetuplistener(),new mainlistener(),new modifylistener()};
         for (Listener Listener : listener) {
             Bukkit.getPluginManager().registerEvents(Listener,this);
         }

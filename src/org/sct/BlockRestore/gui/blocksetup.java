@@ -9,24 +9,17 @@ import org.bukkit.inventory.meta.ItemMeta;
 import static org.sct.BlockRestore.Main.variableManager;
 
 public class blocksetup {
-    private String blockname;
+    private static String blockname;
     private Inventory blocksetup;
     private int time;
 
-    public void openInventory(Player player) {//基本容器
+    private void setBlocksetup () {//填充容器
         int slot[] = {0, 1, 2, 3, 5, 6, 7, 8, 9, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26};
         ItemStack LIME_STAINED_GLASS_PANE = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
         blocksetup.setItem(4, new ItemStack(Material.getMaterial(blockname)));
         for (int Slot : slot) {
             blocksetup.setItem(Slot, LIME_STAINED_GLASS_PANE);
         }
-        player.openInventory(blocksetup);
-    }
-
-    public void openinv(Player player, String blockname) {//带顶部图标的容器扩展
-        this.blockname = blockname;
-        variableManager.setBlocksetup(3 * 9, "§bBlocksetup: §e" + blockname);
-        blocksetup = variableManager.getBlocksetup();
         ItemStack Row10 = new ItemStack(Material.RED_WOOL);
         ItemStack Row11 = new ItemStack(Material.STONE);
         ItemStack Row12 = new ItemStack(Material.GRASS_BLOCK);
@@ -62,32 +55,47 @@ public class blocksetup {
         blocksetup.setItem(14,Row14);
         blocksetup.setItem(15, Row15);
         blocksetup.setItem(16,Row16);
-        openInventory(player);
     }
 
-    public void openinv_modifyblock(Player player, String replace) {
+    public void openinv(Player player, String blockname) {//打开默认容器
+        this.blockname = blockname;
+        variableManager.setBlocksetup(3 * 9, "§b方块设置: §e" + blockname);
+        blocksetup = variableManager.getBlocksetup();
+        setBlocksetup();
+        player.openInventory(blocksetup);
+    }
+
+    public void openinv_modifyblock(Player player, String replace) {//打开修改方块类型后的容器
+        blocksetup = variableManager.getBlocksetup();
         ItemStack it = new ItemStack(Material.getMaterial(replace));
         ItemMeta itm = it.getItemMeta();
         itm.setDisplayName("§b替换的方块类型");
         it.setItemMeta(itm);
         blocksetup.setItem(11,it);
-        player.sendMessage(blockname);
-        openInventory(player);
+        player.openInventory(blocksetup);
     }
 
-    public void openinv_modifytime(Player player) {
+    public void openinv_modifytime(Player player) {//打开修改时间后的容器
+        blocksetup = variableManager.getBlocksetup();
         ItemStack it = blocksetup.getItem(15);
         ItemMeta itm = it.getItemMeta();
         time = variableManager.gettime();
         itm.setDisplayName("§a恢复时长(" + time + "秒)");
         it.setItemMeta(itm);
         blocksetup.setItem(15,it);
-        openInventory(player);
+        player.openInventory(blocksetup);
     }
 
-    public void clean () {
+    public void clean() {
         blocksetup = variableManager.getBlocksetup();
         blocksetup = null;
     }
 
+    public String getBlockname() {
+        return blockname;
+    }
+
+    public void setBlockname(String blockname) {
+        this.blockname = blockname;
+    }
 }

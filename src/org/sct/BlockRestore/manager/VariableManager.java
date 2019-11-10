@@ -6,9 +6,9 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.sct.BlockRestore.Main;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import static org.sct.BlockRestore.Main.Instance;
@@ -20,10 +20,13 @@ public class VariableManager {
     private HashMap<Player,Boolean> player_chat= new HashMap<>();
     private HashMap<Player,Integer> player_int = new HashMap<>();
     private int time = -1;
-    private List<String> placelist,breaklist;
     private Material inputmr;
-    private Inventory blocksetup;
+    private Inventory blocksetup,modify;
     private ArrayList<String> blocklist = new ArrayList<>();
+
+    public void setModify (int size,String title) {
+        modify = Bukkit.createInventory(null,size,title);
+    }
 
     public void setBlocksetup (int size,String title) {
         blocksetup = Bukkit.createInventory(null,size,title);
@@ -43,6 +46,10 @@ public class VariableManager {
 
     public Inventory getBlocksetup() {
         return blocksetup;
+    }
+
+    public Inventory getModify() {
+        return modify;
     }
 
     public CopyOnWriteArrayList getlocation() {
@@ -67,14 +74,6 @@ public class VariableManager {
 
     public void settime (int time) {
         this.time = time;
-    }
-
-    public List getplacelist() {
-        return placelist;
-    }
-
-    public List getbreaklist() {
-        return breaklist;
     }
 
     public static Main getInstance() {

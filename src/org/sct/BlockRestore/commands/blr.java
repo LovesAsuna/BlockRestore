@@ -33,6 +33,7 @@ public class blr implements CommandExecutor,TabCompleter {
             } else if (args.length == 1 && args[0].equalsIgnoreCase("test")) {
                 editor editor = new editor();
                 editor.openInventory((Player) sender);
+                return true;
             }
 
 

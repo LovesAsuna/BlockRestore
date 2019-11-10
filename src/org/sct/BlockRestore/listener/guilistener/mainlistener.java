@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 import static org.sct.BlockRestore.Main.variableManager;
 
-public class invmain implements Listener {
+public class mainlistener implements Listener {
     private HashMap<Player,Boolean> player_chat = variableManager.getplayer_chat();
     private HashMap<Player,Integer> player_int = variableManager.getplayer_int();
 

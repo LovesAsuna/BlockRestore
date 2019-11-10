@@ -28,11 +28,10 @@ public class editor {
         return num;
     }
 
-    private Inventory createInventory() {
+    private void createInventory() {
         int num = getnum();
-        System.out.println("num: " + num);
         ItemStack glass = new ItemStack(Material.LIGHT_BLUE_STAINED_GLASS_PANE);
-        editor = Bukkit.createInventory(null,5 * 9,"Editor");
+        editor = Bukkit.createInventory(null,5 * 9,"编辑器");
         int slot[] = {0,1,2,3,4,5,6,7,8,9,17,18,26,27,35,36,37,38,39,40,41,42,43,44};
         for (int Slot : slot) {
                editor.setItem(Slot, glass);
@@ -41,7 +40,7 @@ public class editor {
         int s = 10;
         for (String block: blocklist) {
             if (s == 16) s = 19;
-            if (s == 25) s = 27;
+            if (s == 25) s = 28;
             ItemStack itemStack = new ItemStack(Material.getMaterial(block));
             ItemMeta itemMeta = itemStack.getItemMeta();
             ArrayList<String> lore = new ArrayList<>();
@@ -56,8 +55,6 @@ public class editor {
             editor.setItem(s,itemStack);
             s++;
         }
-
-        return editor;
     }
 
     private String status(String path) {
