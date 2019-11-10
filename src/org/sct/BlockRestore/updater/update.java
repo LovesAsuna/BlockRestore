@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 
-import static org.sct.BlockRestore.Manager.VariableManager.*;
+import static org.sct.BlockRestore.manager.VariableManager.*;
 
 public class update implements Runnable{
 

@@ -1,6 +1,5 @@
-package org.sct.BlockRestore.GUI;
+package org.sct.BlockRestore.gui;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -9,10 +8,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import static org.sct.BlockRestore.Main.variableManager;
 
-public class modify {
-    String blockname;
-    Inventory blocksetup = variableManager.getBlocksetup();
-    int time = variableManager.gettime();
+public class blocksetup {
+    private String blockname;
+    private Inventory blocksetup;
+    private int time;
 
     public void openInventory(Player player) {//基本容器
         int slot[] = {0, 1, 2, 3, 5, 6, 7, 8, 9, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26};
@@ -25,8 +24,9 @@ public class modify {
     }
 
     public void openinv(Player player, String blockname) {//带顶部图标的容器扩展
-        if (this.blockname == null) this.blockname = blockname;
-        blocksetup = Bukkit.createInventory(null, 3 * 9, "§bBlocksetup: §e" + blockname);
+        this.blockname = blockname;
+        variableManager.setBlocksetup(3 * 9, "§bBlocksetup: §e" + blockname);
+        blocksetup = variableManager.getBlocksetup();
         ItemStack Row10 = new ItemStack(Material.RED_WOOL);
         ItemStack Row11 = new ItemStack(Material.STONE);
         ItemStack Row12 = new ItemStack(Material.GRASS_BLOCK);
@@ -65,7 +65,7 @@ public class modify {
         openInventory(player);
     }
 
-    public void openinv_2(Player player, String replace) {
+    public void openinv_modifyblock(Player player, String replace) {
         ItemStack it = new ItemStack(Material.getMaterial(replace));
         ItemMeta itm = it.getItemMeta();
         itm.setDisplayName("§b替换的方块类型");
@@ -75,12 +75,19 @@ public class modify {
         openInventory(player);
     }
 
-    public void openinv_3(Player player) {
+    public void openinv_modifytime(Player player) {
         ItemStack it = blocksetup.getItem(15);
         ItemMeta itm = it.getItemMeta();
+        time = variableManager.gettime();
         itm.setDisplayName("§a恢复时长(" + time + "秒)");
         it.setItemMeta(itm);
         blocksetup.setItem(15,it);
         openInventory(player);
     }
+
+    public void clean () {
+        blocksetup = variableManager.getBlocksetup();
+        blocksetup = null;
+    }
+
 }

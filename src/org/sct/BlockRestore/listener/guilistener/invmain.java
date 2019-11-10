@@ -14,6 +14,7 @@ public class invmain implements Listener {
 
     @EventHandler
     public void onInvmain(InventoryClickEvent e) {
+
         Player player = (Player) e.getWhoClicked();
         if (e.getWhoClicked().getOpenInventory().getTitle().equalsIgnoreCase("BlockRestore主菜单")) {
             if (e.getRawSlot() == 12) {
@@ -27,6 +28,8 @@ public class invmain implements Listener {
                 player.sendMessage("§e或输入cancel取消添加");
                 player.closeInventory();
             }
+
+
             e.setCancelled(true);
         }
     }

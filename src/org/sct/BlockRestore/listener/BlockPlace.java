@@ -8,7 +8,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import java.util.List;
 
 import static org.sct.BlockRestore.Main.variableManager;
-import static org.sct.BlockRestore.Manager.VariableManager.*;
+import static org.sct.BlockRestore.manager.VariableManager.*;
 
 public class BlockPlace implements Listener {
     private List<String> placelist = variableManager.getplacelist();

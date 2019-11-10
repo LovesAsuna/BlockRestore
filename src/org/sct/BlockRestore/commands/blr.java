@@ -6,13 +6,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
-import org.sct.BlockRestore.GUI.editor;
-import org.sct.BlockRestore.GUI.main;
+import org.sct.BlockRestore.gui.editor;
+import org.sct.BlockRestore.gui.main;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.sct.BlockRestore.Manager.VariableManager.*;
+import static org.sct.BlockRestore.manager.VariableManager.*;
 
 public class blr implements CommandExecutor,TabCompleter {
     @Override

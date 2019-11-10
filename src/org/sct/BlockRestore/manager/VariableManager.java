@@ -1,5 +1,6 @@
-package org.sct.BlockRestore.Manager;
+package org.sct.BlockRestore.manager;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -23,6 +24,10 @@ public class VariableManager {
     private Material inputmr;
     private Inventory blocksetup;
     private ArrayList<String> blocklist = new ArrayList<>();
+
+    public void setBlocksetup (int size,String title) {
+        blocksetup = Bukkit.createInventory(null,size,title);
+    }
 
     public HashMap getplayer_int() {
         return player_int;
@@ -58,6 +63,10 @@ public class VariableManager {
 
     public int gettime() {
         return time;
+    }
+
+    public void settime (int time) {
+        this.time = time;
     }
 
     public List getplacelist() {

@@ -1,4 +1,4 @@
-package org.sct.BlockRestore.GUI;
+package org.sct.BlockRestore.gui;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -9,10 +9,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import static org.sct.BlockRestore.Main.variableManager;
 
-public class blocksetup {
-    private String blockname;
-    private Inventory blocksetup = variableManager.getBlocksetup();
-    private int time = variableManager.gettime();
+public class modify {
+    String blockname;
+    Inventory blocksetup = variableManager.getBlocksetup();
+    int time = variableManager.gettime();
 
     public void openInventory(Player player) {//基本容器
         int slot[] = {0, 1, 2, 3, 5, 6, 7, 8, 9, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26};
@@ -65,7 +65,7 @@ public class blocksetup {
         openInventory(player);
     }
 
-    public void openinv_modifyblock(Player player, String replace) {
+    public void openinv_2(Player player, String replace) {
         ItemStack it = new ItemStack(Material.getMaterial(replace));
         ItemMeta itm = it.getItemMeta();
         itm.setDisplayName("§b替换的方块类型");
@@ -75,7 +75,7 @@ public class blocksetup {
         openInventory(player);
     }
 
-    public void openinv_modifytime(Player player) {
+    public void openinv_3(Player player) {
         ItemStack it = blocksetup.getItem(15);
         ItemMeta itm = it.getItemMeta();
         itm.setDisplayName("§a恢复时长(" + time + "秒)");
@@ -83,5 +83,4 @@ public class blocksetup {
         blocksetup.setItem(15,it);
         openInventory(player);
     }
-
 }

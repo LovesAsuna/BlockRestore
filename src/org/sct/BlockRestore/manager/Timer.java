@@ -1,4 +1,4 @@
-package org.sct.BlockRestore.Manager;
+package org.sct.BlockRestore.manager;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import static org.sct.BlockRestore.Main.variableManager;
-import static org.sct.BlockRestore.Manager.VariableManager.getInstance;
+import static org.sct.BlockRestore.manager.VariableManager.getInstance;
 
 public class Timer {
     private CopyOnWriteArrayList<Location> location = variableManager.getlocation();

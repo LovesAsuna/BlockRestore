@@ -6,14 +6,14 @@ import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.sct.BlockRestore.Manager.Timer;
+import org.sct.BlockRestore.manager.Timer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import static org.sct.BlockRestore.Main.*;
-import static org.sct.BlockRestore.Manager.VariableManager.*;
+import static org.sct.BlockRestore.manager.VariableManager.*;
 
 public class BlockBreak implements Listener {
     private Timer timer;

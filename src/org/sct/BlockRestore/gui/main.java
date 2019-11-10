@@ -1,4 +1,4 @@
-package org.sct.BlockRestore.GUI;
+package org.sct.BlockRestore.gui;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

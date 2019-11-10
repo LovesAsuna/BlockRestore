@@ -11,17 +11,18 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.HashMap;
 
 import static org.sct.BlockRestore.Main.variableManager;
-import static org.sct.BlockRestore.Manager.VariableManager.*;
+import static org.sct.BlockRestore.manager.VariableManager.*;
 
 public class invblocksetup implements Listener {
     private HashMap<Player,Boolean> player_chat = variableManager.getplayer_chat();
     private HashMap<Player,Integer> player_int = variableManager.getplayer_int();
-    private Inventory blocksetup = variableManager.getBlocksetup();
-    private int time = variableManager.gettime();
+    private Inventory blocksetup;
+    private int time ;
 
     @EventHandler
     public void onInvblocksetup(InventoryClickEvent e) {
         Player player = (Player) e.getWhoClicked();
+        blocksetup = variableManager.getBlocksetup();
         if (e.getWhoClicked().getOpenInventory().getTitle().contains("§bBlocksetup: §e")) {
             if (e.getRawSlot() == 10) {
                 if (blocksetup.getItem(10).getType() == Material.LIME_WOOL) {
@@ -104,6 +105,7 @@ public class invblocksetup implements Listener {
             }
 
             if (e.getRawSlot() == 16) {
+                time = variableManager.gettime();
                 if (time == -1) {
                     player.sendMessage("§c尚未定义时间!");
                     e.setCancelled(true);
@@ -126,7 +128,7 @@ public class invblocksetup implements Listener {
                 getInstance().getConfig().set("blocks." + blockname + ".restoretime",time);
                 getInstance().saveConfig();
                 player.closeInventory();
-                time = -1;
+                variableManager.settime(-1);
                 blocksetup = null;
                 getInstance().initialize();
             }

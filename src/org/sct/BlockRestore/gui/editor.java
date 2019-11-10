@@ -1,4 +1,4 @@
-package org.sct.BlockRestore.GUI;
+package org.sct.BlockRestore.gui;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -9,7 +9,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 
 import static org.sct.BlockRestore.Main.variableManager;
-import static org.sct.BlockRestore.Manager.VariableManager.getInstance;
+import static org.sct.BlockRestore.manager.VariableManager.getInstance;
 
 public class editor {
     private Inventory editor;
