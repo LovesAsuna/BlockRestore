@@ -6,18 +6,17 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
-import org.sct.BlockRestore.gui.editor;
 import org.sct.BlockRestore.gui.main;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.sct.BlockRestore.manager.VariableManager.*;
+import static org.sct.BlockRestore.manager.VariableManager.getInstance;
 
-public class blr implements CommandExecutor,TabCompleter {
+public class blockrestore implements CommandExecutor,TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (cmd.getName().equalsIgnoreCase("blr")) {
+        if (cmd.getName().equalsIgnoreCase("blockrestore")) {
             if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
                 if (sender.isOp()) {
                     getInstance().initialize();
@@ -26,21 +25,11 @@ public class blr implements CommandExecutor,TabCompleter {
                     sender.sendMessage("§7[§eBlockRestore§7]§c你没有此命令的权限");
                 }
                 return true;
-            } else if (args.length == 1 && args[0].equalsIgnoreCase("setup")) {
+            } else if (args.length == 1 && args[0].equalsIgnoreCase("main")) {
                 main main = new main();
                 main.openInventory((Player) sender);
                 return true;
-            } else if (args.length == 1 && args[0].equalsIgnoreCase("test")) {
-                editor editor = new editor();
-                editor.openInventory((Player) sender);
-                return true;
             }
-
-
-
-
-
-
 
         }
         sender.sendMessage("§7[§eBlockRestore§7]§c你输入的命令不正确");
@@ -52,7 +41,7 @@ public class blr implements CommandExecutor,TabCompleter {
         ArrayList<String> completions = new ArrayList<>();
         if (args.length == 1) {
             completions.add("reload");
-            completions.add("setup");
+            completions.add("main");
             return StringUtil.copyPartialMatches(args[0],completions,new ArrayList<>());
         }
         return completions;

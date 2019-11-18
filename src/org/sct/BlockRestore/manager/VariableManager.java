@@ -21,15 +21,15 @@ public class VariableManager {
     private HashMap<Player,Integer> player_int = new HashMap<>();
     private int time = -1;
     private Material inputmr;
-    private Inventory blocksetup,modify;
+    private Inventory invsetup,invmodify,inveditor;
     private ArrayList<String> blocklist = new ArrayList<>();
 
     public void setModify (int size,String title) {
-        modify = Bukkit.createInventory(null,size,title);
+        invmodify = Bukkit.createInventory(null,size,title);
     }
 
     public void setBlocksetup (int size,String title) {
-        blocksetup = Bukkit.createInventory(null,size,title);
+        invsetup = Bukkit.createInventory(null,size,title);
     }
 
     public HashMap getplayer_int() {
@@ -44,12 +44,16 @@ public class VariableManager {
         return inputmr;
     }
 
-    public Inventory getBlocksetup() {
-        return blocksetup;
+    public Inventory getInvsetup() {
+        return invsetup;
     }
 
-    public Inventory getModify() {
-        return modify;
+    public Inventory getInvmodify() {
+        return invmodify;
+    }
+
+    public Inventory getInveditor() {
+        return inveditor;
     }
 
     public CopyOnWriteArrayList getlocation() {

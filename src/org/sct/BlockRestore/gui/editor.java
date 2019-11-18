@@ -12,12 +12,12 @@ import static org.sct.BlockRestore.Main.variableManager;
 import static org.sct.BlockRestore.manager.VariableManager.getInstance;
 
 public class editor {
-    private Inventory editor;
+    Inventory inveditor = variableManager.getInveditor();
     private ArrayList<String> blocklist = variableManager.getblocklist();
 
     public void openInventory(Player player) {
         createInventory();
-        player.openInventory(editor);
+        player.openInventory(inveditor);
     }
 
     private int getnum() {
@@ -31,10 +31,10 @@ public class editor {
     private void createInventory() {
         int num = getnum();
         ItemStack glass = new ItemStack(Material.LIGHT_BLUE_STAINED_GLASS_PANE);
-        editor = Bukkit.createInventory(null,5 * 9,"编辑器");
+        inveditor = Bukkit.createInventory(null,5 * 9,"editor");
         int slot[] = {0,1,2,3,4,5,6,7,8,9,17,18,26,27,35,36,37,38,39,40,41,42,43,44};
         for (int Slot : slot) {
-               editor.setItem(Slot, glass);
+               inveditor.setItem(Slot, glass);
         }
 
         int s = 10;
@@ -52,7 +52,7 @@ public class editor {
             lore.add("§brestore: §e" + getInstance().getConfig().getInt("blocks." + block + ".restoretime"));
             itemMeta.setLore(lore);
             itemStack.setItemMeta(itemMeta);
-            editor.setItem(s,itemStack);
+            inveditor.setItem(s,itemStack);
             s++;
         }
     }

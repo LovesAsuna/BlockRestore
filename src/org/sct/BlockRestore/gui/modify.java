@@ -11,22 +11,22 @@ import static org.sct.BlockRestore.manager.VariableManager.*;
 
 public class modify {
     private static String blockname;
-    private Inventory modify;
+    private Inventory invmodify;
     private int time;
 
     private void setModify () {//填充容器
         int slot[] = {0, 1, 2, 3, 5, 6, 7, 8, 9, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26};
         ItemStack LIME_STAINED_GLASS_PANE = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
-        modify.setItem(4, new ItemStack(Material.getMaterial(blockname)));
+        invmodify.setItem(4, new ItemStack(Material.getMaterial(blockname)));
         for (int Slot : slot) {
-            modify.setItem(Slot, LIME_STAINED_GLASS_PANE);
+            invmodify.setItem(Slot, LIME_STAINED_GLASS_PANE);
         }
     }
 
     public void openinv(Player player, String blockname) {//打开默认容器
         this.blockname = blockname;
-        variableManager.setModify(3 * 9, "§b方块修改: §e" + blockname);
-        modify = variableManager.getModify();
+        variableManager.setModify(3 * 9, "modify");
+        invmodify = variableManager.getInvmodify();
         setModify();
         ItemStack Row10;
         if (getInstance().getConfig().getBoolean("blocks." + blockname + ".replace")) {
@@ -81,41 +81,40 @@ public class modify {
         Row15.setItemMeta(Row15m);
         Row16m.setDisplayName("§2完成设置");
         Row16.setItemMeta(Row16m);
-        modify.setItem(10, Row10);
-        modify.setItem(11, Row11);
-        modify.setItem(12, Row12);
-        modify.setItem(13,Row13);
-        modify.setItem(14,Row14);
-        modify.setItem(15, Row15);
-        modify.setItem(16,Row16);
-        player.openInventory(modify);
+        invmodify.setItem(10, Row10);
+        invmodify.setItem(11, Row11);
+        invmodify.setItem(12, Row12);
+        invmodify.setItem(13,Row13);
+        invmodify.setItem(14,Row14);
+        invmodify.setItem(15, Row15);
+        invmodify.setItem(16,Row16);
+        player.openInventory(invmodify);
     }
 
     public void openinv_modifyblock(Player player, String replace) {//打开修改方块类型后的容器
-        modify = variableManager.getModify();
+        invmodify = variableManager.getInvmodify();
         ItemStack it = new ItemStack(Material.getMaterial(replace));
         ItemMeta itm = it.getItemMeta();
         itm.setDisplayName("§b替换的方块类型");
         it.setItemMeta(itm);
-        modify.setItem(11,it);
-        player.openInventory(modify);
+        invmodify.setItem(11,it);
+        player.openInventory(invmodify);
     }
 
     public void openinv_modifytime(Player player) {//打开修改时间后的容器
-        modify = variableManager.getModify();
-        System.out.println("dawdwa: " + modify);
-        ItemStack it = modify.getItem(15);
+        invmodify = variableManager.getInvmodify();
+        ItemStack it = invmodify.getItem(15);
         ItemMeta itm = it.getItemMeta();
         time = variableManager.gettime();
         itm.setDisplayName("§a恢复时长(" + time + "秒)");
         it.setItemMeta(itm);
-        modify.setItem(15,it);
-        player.openInventory(modify);
+        invmodify.setItem(15,it);
+        player.openInventory(invmodify);
     }
 
     public void clean() {
-        modify = variableManager.getBlocksetup();
-        modify = null;
+        invmodify = variableManager.getInvmodify();
+        invmodify = null;
     }
 
     public String getBlockname() {

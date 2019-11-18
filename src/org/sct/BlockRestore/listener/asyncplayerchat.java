@@ -6,22 +6,23 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.sct.BlockRestore.gui.blocksetup;
+import org.sct.BlockRestore.gui.setup;
 import org.sct.BlockRestore.gui.modify;
 import java.util.HashMap;
 
 import static org.sct.BlockRestore.Main.variableManager;
 import static org.sct.BlockRestore.manager.VariableManager.getInstance;
 
-public class AsyncPlayerChat implements Listener {
+public class asyncplayerchat implements Listener {
     private HashMap<Player,Boolean> player_chat = variableManager.getplayer_chat();
     private HashMap<Player,Integer> player_int = variableManager.getplayer_int();
     private Material inputmr = variableManager.getInputmr();
-    private blocksetup blocksetup = new blocksetup();
+    private setup setup = new setup();
     private modify modify = new modify();
 
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent e) {
+        System.out.println("聊天事件");
         Player player = e.getPlayer();
         if (player_chat.get(player) != null && player_chat.get(player) ) {//启动了聊天抑制
             if (e.getMessage().equalsIgnoreCase("cancel")) {
@@ -34,7 +35,7 @@ public class AsyncPlayerChat implements Listener {
                     Bukkit.getScheduler().runTaskLater(getInstance(),()->{
                         try {//判断输入是否有效
                             variableManager.settime(Integer.parseInt(e.getMessage()));
-                            blocksetup.openinv_modifytime(player);
+                            setup.openinv_modifytime(player);
                         } catch (Exception ex) {
                             player.sendMessage("§c你输入的时间有误,请重新输入!");
                         }
@@ -53,7 +54,7 @@ public class AsyncPlayerChat implements Listener {
                     },0L);
                 }
 
-                if (player_int.get(player) == 1|| player_int.get(player) == 2) {
+                if (player_int.get(player) == 1 || player_int.get(player) == 2) {
                     inputmr = Material.getMaterial(e.getMessage());
                     if (inputmr == null) {//判断输入是否有效
                         player.sendMessage("§c你输入的命名空间有误,请重新输入!");
@@ -61,11 +62,11 @@ public class AsyncPlayerChat implements Listener {
                         player_chat.remove(player);
                         Bukkit.getScheduler().runTaskLater(getInstance(),()->{
                             if (player_int.get(player) == 1) {
-                                blocksetup.clean();
-                                blocksetup.openinv(player,e.getMessage());
+                                setup.clean();
+                                setup.openinv(player,e.getMessage());
                                 player_int.remove(player);
                             } else if (player_int.get(player) == 2){
-                                blocksetup.openinv_modifyblock(player,e.getMessage());
+                                setup.openinv_modifyblock(player,e.getMessage());
                             }
                         },0L);
                     }
@@ -88,8 +89,6 @@ public class AsyncPlayerChat implements Listener {
                         },0L);
                     }
                 }
-
-
                 e.setCancelled(true);
             }
         }

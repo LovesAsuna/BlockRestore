@@ -8,17 +8,17 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import static org.sct.BlockRestore.Main.variableManager;
 
-public class blocksetup {
+public class setup {
     private static String blockname;
-    private Inventory blocksetup;
+    private Inventory invsetup;
     private int time;
 
     private void setBlocksetup () {//填充容器
         int slot[] = {0, 1, 2, 3, 5, 6, 7, 8, 9, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26};
         ItemStack LIME_STAINED_GLASS_PANE = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
-        blocksetup.setItem(4, new ItemStack(Material.getMaterial(blockname)));
+        invsetup.setItem(4, new ItemStack(Material.getMaterial(blockname)));
         for (int Slot : slot) {
-            blocksetup.setItem(Slot, LIME_STAINED_GLASS_PANE);
+            invsetup.setItem(Slot, LIME_STAINED_GLASS_PANE);
         }
         ItemStack Row10 = new ItemStack(Material.RED_WOOL);
         ItemStack Row11 = new ItemStack(Material.STONE);
@@ -48,47 +48,47 @@ public class blocksetup {
         Row15.setItemMeta(Row15m);
         Row16m.setDisplayName("§2完成设置");
         Row16.setItemMeta(Row16m);
-        blocksetup.setItem(10, Row10);
-        blocksetup.setItem(11, Row11);
-        blocksetup.setItem(12, Row12);
-        blocksetup.setItem(13,Row13);
-        blocksetup.setItem(14,Row14);
-        blocksetup.setItem(15, Row15);
-        blocksetup.setItem(16,Row16);
+        invsetup.setItem(10, Row10);
+        invsetup.setItem(11, Row11);
+        invsetup.setItem(12, Row12);
+        invsetup.setItem(13,Row13);
+        invsetup.setItem(14,Row14);
+        invsetup.setItem(15, Row15);
+        invsetup.setItem(16,Row16);
     }
 
     public void openinv(Player player, String blockname) {//打开默认容器
         this.blockname = blockname;
-        variableManager.setBlocksetup(3 * 9, "§b方块设置: §e" + blockname);
-        blocksetup = variableManager.getBlocksetup();
+        variableManager.setBlocksetup(3 * 9, "§b方块设置");
+        invsetup = variableManager.getInvsetup();
         setBlocksetup();
-        player.openInventory(blocksetup);
+        player.openInventory(invsetup);
     }
 
     public void openinv_modifyblock(Player player, String replace) {//打开修改方块类型后的容器
-        blocksetup = variableManager.getBlocksetup();
+        invsetup = variableManager.getInvsetup();
         ItemStack it = new ItemStack(Material.getMaterial(replace));
         ItemMeta itm = it.getItemMeta();
         itm.setDisplayName("§b替换的方块类型");
         it.setItemMeta(itm);
-        blocksetup.setItem(11,it);
-        player.openInventory(blocksetup);
+        invsetup.setItem(11,it);
+        player.openInventory(invsetup);
     }
 
     public void openinv_modifytime(Player player) {//打开修改时间后的容器
-        blocksetup = variableManager.getBlocksetup();
-        ItemStack it = blocksetup.getItem(15);
+        invsetup = variableManager.getInvsetup();
+        ItemStack it = invsetup.getItem(15);
         ItemMeta itm = it.getItemMeta();
         time = variableManager.gettime();
         itm.setDisplayName("§a恢复时长(" + time + "秒)");
         it.setItemMeta(itm);
-        blocksetup.setItem(15,it);
-        player.openInventory(blocksetup);
+        invsetup.setItem(15,it);
+        player.openInventory(invsetup);
     }
 
     public void clean() {
-        blocksetup = variableManager.getBlocksetup();
-        blocksetup = null;
+        invsetup = variableManager.getInvsetup();
+        invsetup = null;
     }
 
     public String getBlockname() {

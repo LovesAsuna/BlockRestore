@@ -5,7 +5,7 @@ main: org.sct.BlockRestore.Main
 description: 方块复原
 api-version: 1.13
 commands:
-  blr:
+  blockrestore:
     description: 插件主命令
     usage: "/blr"
-    aliases: [BlockRestore,blockrestore]
+    aliases: [BlockRestore,blockrestore,blr,br]

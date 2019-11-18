@@ -10,7 +10,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class main {
     public void openInventory (Player player) {
         int slot[] = {0,1,2,3,4,5,6,7,8,9,17,18,19,20,21,22,23,24,25,26};
-        Inventory main = Bukkit.createInventory(null,3 * 9,"BlockRestore主菜单");
+        Inventory main = Bukkit.createInventory(null,3 * 9,"§bBlockRestore主菜单");
         ItemStack LIME_STAINED_GLASS_PANE = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
         ItemStack restonetorch = new ItemStack(Material.REDSTONE_TORCH);
         ItemStack painting = new ItemStack(Material.PAINTING);
