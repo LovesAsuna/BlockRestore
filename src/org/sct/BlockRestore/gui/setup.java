@@ -20,41 +20,13 @@ public class setup {
         for (int Slot : slot) {
             invsetup.setItem(Slot, LIME_STAINED_GLASS_PANE);
         }
-        ItemStack Row10 = new ItemStack(Material.RED_WOOL);
-        ItemStack Row11 = new ItemStack(Material.STONE);
-        ItemStack Row12 = new ItemStack(Material.GRASS_BLOCK);
-        ItemStack Row13 = new ItemStack(Material.ENCHANTING_TABLE);
-        ItemStack Row14 = new ItemStack(Material.CHEST);
-        ItemStack Row15 = new ItemStack(Material.REDSTONE);
-        ItemStack Row16 = new ItemStack(Material.LEVER);
-        ItemMeta Row10m = Row10.getItemMeta();
-        ItemMeta Row11m = Row10.getItemMeta();
-        ItemMeta Row12m = Row12.getItemMeta();
-        ItemMeta Row13m = Row13.getItemMeta();
-        ItemMeta Row14m = Row14.getItemMeta();
-        ItemMeta Row15m = Row15.getItemMeta();
-        ItemMeta Row16m = Row16.getItemMeta();
-        Row10m.setDisplayName("§c关闭方块替换");
-        Row10.setItemMeta(Row10m);
-        Row11m.setDisplayName("§b替换的方块类型");
-        Row11.setItemMeta(Row11m);
-        Row12m.setDisplayName("§b允许放置");
-        Row12.setItemMeta(Row12m);
-        Row13m.setDisplayName("§2自动恢复");
-        Row13.setItemMeta(Row13m);
-        Row14m.setDisplayName("§a直接给予物品");
-        Row14.setItemMeta(Row14m);
-        Row15m.setDisplayName("§a恢复时长(单位:秒)");
-        Row15.setItemMeta(Row15m);
-        Row16m.setDisplayName("§2完成设置");
-        Row16.setItemMeta(Row16m);
-        invsetup.setItem(10, Row10);
-        invsetup.setItem(11, Row11);
-        invsetup.setItem(12, Row12);
-        invsetup.setItem(13,Row13);
-        invsetup.setItem(14,Row14);
-        invsetup.setItem(15, Row15);
-        invsetup.setItem(16,Row16);
+        invsetup.setItem(10,blocks.RED_WOOL.getItemStack());
+        invsetup.setItem(11,blocks.STONE.getItemStack());
+        invsetup.setItem(12,blocks.GRASS_BLOCK.getItemStack());
+        invsetup.setItem(13,blocks.ENCHANTING_TABLE.getItemStack());
+        invsetup.setItem(14,blocks.CHEST.getItemStack());
+        invsetup.setItem(15,blocks.REDSTONE.getItemStack());
+        invsetup.setItem(16,blocks.LEVER.getItemStack());
     }
 
     public void openinv(Player player, String blockname) {//打开默认容器

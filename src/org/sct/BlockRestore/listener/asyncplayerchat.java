@@ -22,7 +22,6 @@ public class asyncplayerchat implements Listener {
 
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent e) {
-        System.out.println("聊天事件");
         Player player = e.getPlayer();
         if (player_chat.get(player) != null && player_chat.get(player) ) {//启动了聊天抑制
             if (e.getMessage().equalsIgnoreCase("cancel")) {

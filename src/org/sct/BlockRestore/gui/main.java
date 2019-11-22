@@ -14,17 +14,22 @@ public class main {
         ItemStack LIME_STAINED_GLASS_PANE = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
         ItemStack restonetorch = new ItemStack(Material.REDSTONE_TORCH);
         ItemStack painting = new ItemStack(Material.PAINTING);
+        ItemStack feather = new ItemStack(Material.FEATHER);
         ItemMeta redstonetorchm = restonetorch.getItemMeta();
         ItemMeta paintingm = painting.getItemMeta();
+        ItemMeta featherm = feather.getItemMeta();
         paintingm.setDisplayName("§a编辑方块");
         redstonetorchm.setDisplayName("§b增加方块");
+        featherm.setDisplayName("§e修改方块");
         restonetorch.setItemMeta(redstonetorchm);
         painting.setItemMeta(paintingm);
+        feather.setItemMeta(featherm);
         for (int Slot : slot) {
             main.setItem(Slot,LIME_STAINED_GLASS_PANE);
         }
         main.setItem(12,painting);
         main.setItem(13,restonetorch);
+        main.setItem(14,feather);
         player.openInventory(main);
     }
 

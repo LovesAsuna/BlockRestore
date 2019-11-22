@@ -25,69 +25,44 @@ public class modify {
 
     public void openinv(Player player, String blockname) {//打开默认容器
         this.blockname = blockname;
-        variableManager.setModify(3 * 9, "modify");
+        variableManager.setModify(3 * 9, "§a编辑器");
         invmodify = variableManager.getInvmodify();
         setModify();
-        ItemStack Row10;
+        ItemStack row10,row11,row12,row13,row14,row15,row16;
         if (getInstance().getConfig().getBoolean("blocks." + blockname + ".replace")) {
-            Row10 = new ItemStack(Material.LIME_WOOL);
-            ItemMeta Row10m = Row10.getItemMeta();
-            Row10m.setDisplayName("§a开启方块替换");
+            row10 = blocks.LIME_WOOL.getItemStack();
         } else {
-            Row10 = new ItemStack(Material.RED_WOOL);
-            ItemMeta Row10m = Row10.getItemMeta();
-            Row10m.setDisplayName("§c关闭方块替换");
+            row10 = blocks.RED_WOOL.getItemStack();
         }
-        ItemStack Row11 = new ItemStack(Material.getMaterial(getInstance().getConfig().getString("blocks." + blockname + ".replaceblock")));
-        ItemStack Row12;
+        row11 = new ItemStack(Material.getMaterial(getInstance().getConfig().getString("blocks." + blockname + ".replaceblock")));
         if (getInstance().getConfig().getBoolean("blocks." + blockname + "denyplace")) {
-            Row12 = new ItemStack(Material.REDSTONE_BLOCK);
-            ItemMeta Row12m = Row12.getItemMeta();
-            Row12m.setDisplayName("§c禁止放置");
+            row12 = blocks.BARRIER.getItemStack();
         } else {
-            Row12 = new ItemStack(Material.GRASS_BLOCK);
-            ItemMeta Row12m = Row12.getItemMeta();
-            Row12m.setDisplayName("§a允许放置");
+            row12 = blocks.GRASS_BLOCK.getItemStack();
         }
-        ItemStack Row13;
         if (getInstance().getConfig().getBoolean("blocks." + blockname + ".restore")) {
-            Row13 = new ItemStack(Material.ENCHANTING_TABLE);
-            ItemMeta Row13m = Row13.getItemMeta();
-            Row13m.setDisplayName("§a自动恢复");
+            row13 = blocks.ENCHANTING_TABLE.getItemStack();
         } else {
-            Row13 = new ItemStack(Material.END_PORTAL_FRAME);
-            ItemMeta Row13m = Row13.getItemMeta();
-            Row13m.setDisplayName("§c禁用自动恢复");
+            row13 = blocks.CRAFTING_TABLE.getItemStack();
         }
-        ItemStack Row14;
         if (getInstance().getConfig().getBoolean("blocks." + blockname + ".directgiveitem")) {
-            Row14 = new ItemStack(Material.CHEST);
-            ItemMeta Row14m = Row14.getItemMeta();
-            Row14m.setDisplayName("§a直接给予物品");
+            row14 = blocks.CHEST.getItemStack();
         } else {
-            Row14 = new ItemStack(Material.ENDER_CHEST);
-            ItemMeta Row14m = Row14.getItemMeta();
-            Row14m.setDisplayName("§c禁用直接给予物品");
+            row14 = blocks.ENDER_CHEST.getItemStack();
         }
-        ItemStack Row15 = new ItemStack(Material.REDSTONE);
-        ItemStack Row16 = new ItemStack(Material.LEVER);
-        ItemMeta Row11m = Row10.getItemMeta();
-        ItemMeta Row12m = Row12.getItemMeta();
-        ItemMeta Row13m = Row13.getItemMeta();
-        ItemMeta Row14m = Row14.getItemMeta();
-        ItemMeta Row15m = Row15.getItemMeta();
-        ItemMeta Row16m = Row16.getItemMeta();
-        Row15m.setDisplayName("§a恢复时长(" + getInstance().getConfig().getInt("blocks." + blockname + ".restoretime") + "秒)");
-        Row15.setItemMeta(Row15m);
-        Row16m.setDisplayName("§2完成设置");
-        Row16.setItemMeta(Row16m);
-        invmodify.setItem(10, Row10);
-        invmodify.setItem(11, Row11);
-        invmodify.setItem(12, Row12);
-        invmodify.setItem(13,Row13);
-        invmodify.setItem(14,Row14);
-        invmodify.setItem(15, Row15);
-        invmodify.setItem(16,Row16);
+        row15 = new ItemStack(Material.REDSTONE);
+        row16 = blocks.LEVER.getItemStack();
+        ItemMeta row15m = row15.getItemMeta();
+        ItemMeta row16m = row16.getItemMeta();
+        row15m.setDisplayName("§a恢复时长(" + getInstance().getConfig().getInt("blocks." + blockname + ".restoretime") + "秒)");
+        row15.setItemMeta(row15m);
+        invmodify.setItem(10,row10);
+        invmodify.setItem(11,row11);
+        invmodify.setItem(12,row12);
+        invmodify.setItem(13,row13);
+        invmodify.setItem(14,row14);
+        invmodify.setItem(15,row15);
+        invmodify.setItem(16,row16);
         player.openInventory(invmodify);
     }
 
