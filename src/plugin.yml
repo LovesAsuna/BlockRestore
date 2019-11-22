@@ -1,6 +1,6 @@
 name: BlockRestore
 author: icestar
-version: 1.5
+version: 2.0
 main: org.sct.BlockRestore.Main
 description: 方块复原
 api-version: 1.13
