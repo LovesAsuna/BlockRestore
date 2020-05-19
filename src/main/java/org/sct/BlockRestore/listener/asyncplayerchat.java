@@ -10,8 +10,7 @@ import org.sct.BlockRestore.gui.setup;
 import org.sct.BlockRestore.gui.modify;
 import java.util.HashMap;
 
-import static org.sct.BlockRestore.Main.variableManager;
-import static org.sct.BlockRestore.manager.VariableManager.getInstance;
+import static org.sct.BlockRestore.Main.*;
 
 public class asyncplayerchat implements Listener {
     private HashMap<Player,Boolean> player_chat = variableManager.getplayer_chat();

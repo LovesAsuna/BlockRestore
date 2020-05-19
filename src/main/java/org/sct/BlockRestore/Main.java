@@ -58,4 +58,7 @@ public class Main extends JavaPlugin {
         }
     }
 
+    public static Main getInstance() {
+        return Instance;
+    }
 }

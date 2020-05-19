@@ -5,13 +5,10 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.sct.BlockRestore.Main;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
-
-import static org.sct.BlockRestore.Main.Instance;
 
 public class VariableManager {
     private CopyOnWriteArrayList<Location> location = new CopyOnWriteArrayList<>();
@@ -78,9 +75,5 @@ public class VariableManager {
 
     public void settime (int time) {
         this.time = time;
-    }
-
-    public static Main getInstance() {
-        return Instance;
     }
 }

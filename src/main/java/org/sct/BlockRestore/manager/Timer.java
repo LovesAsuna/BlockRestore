@@ -3,12 +3,13 @@ package org.sct.BlockRestore.manager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.sct.BlockRestore.Main;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import static org.sct.BlockRestore.Main.variableManager;
-import static org.sct.BlockRestore.manager.VariableManager.getInstance;
 
 public class Timer {
     private CopyOnWriteArrayList<Location> location = variableManager.getlocation();
@@ -17,7 +18,7 @@ public class Timer {
     private HashMap<Location,Long> lt_time = variableManager.getlt_time();
 
     public void run() {
-        Bukkit.getScheduler().runTaskTimer(getInstance(),()->{
+        Bukkit.getScheduler().runTaskTimer(Main.getInstance(),()->{
             Long nowTime = System.currentTimeMillis()/1000;
             for (Location lt : location) {
                 boolean skip = true;//是否跳过坐标
@@ -32,13 +33,13 @@ public class Timer {
                     }
                 }
                 if (skip) continue;//如果不在列表内,跳过此处坐标
-                int time = getInstance().getConfig().getInt("blocks." + material + ".restoretime");
+                int time = Main.getInstance().getConfig().getInt("blocks." + material + ".restoretime");
                 System.out.println("blocks." + material + ".restoretime: " + time);
-                Material replace = Material.getMaterial(getInstance().getConfig().getString("blocks." + material + ".replaceblock"));
+                Material replace = Material.getMaterial(Main.getInstance().getConfig().getString("blocks." + material + ".replaceblock"));
                 if (lt_time.get(lt) != null) {
                     if (nowTime - lt_time.get(lt) + 1 >= time) {//时间大于预设时间
                         //System.out.println("时间大于delay");
-                        if (getInstance().getConfig().getBoolean("blocks." + material + ".replace")) {//如果replacerestore开启
+                        if (Main.getInstance().getConfig().getBoolean("blocks." + material + ".replace")) {//如果replacerestore开启
                             if (lt.getBlock().getType() == Material.AIR) {//如果等于空气,恢复成替换方块
                                 //System.out.println("如果等于空气,恢复成替换方块");
                                 lt.getBlock().setType(replace);

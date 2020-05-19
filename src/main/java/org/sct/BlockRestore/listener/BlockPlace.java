@@ -6,8 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import java.util.ArrayList;
 
-import static org.sct.BlockRestore.Main.variableManager;
-import static org.sct.BlockRestore.manager.VariableManager.getInstance;
+import static org.sct.BlockRestore.Main.*;
 
 public class BlockPlace implements Listener {
     private ArrayList<String> blocklist = variableManager.getblocklist();

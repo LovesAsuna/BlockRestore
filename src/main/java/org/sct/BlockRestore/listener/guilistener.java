@@ -10,8 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.sct.BlockRestore.gui.*;
 import java.util.HashMap;
 
-import static org.sct.BlockRestore.Main.variableManager;
-import static org.sct.BlockRestore.manager.VariableManager.getInstance;
+import static org.sct.BlockRestore.Main.*;
 
 public class guilistener implements Listener {
     private HashMap<Player,Integer> player_int = variableManager.getplayer_int();
@@ -73,7 +72,7 @@ public class guilistener implements Listener {
         if (e.getWhoClicked().getOpenInventory().getTitle().equalsIgnoreCase("§e方块总览")) {
             //player.sendMessage("打开了方块总览");
             if (e.getCurrentItem() == null) return;
-            if (e.getCurrentItem().getType() != Material.LIGHT_BLUE_STAINED_GLASS_PANE) {
+            if (e.getCurrentItem().getType() != Material.REDSTONE_BLOCK) {
                 Bukkit.getScheduler().runTaskLater(getInstance(),()->{
                     modify modify = new modify();
                     modify.clean();;
@@ -140,14 +139,14 @@ public class guilistener implements Listener {
 
     private void output(InventoryClickEvent e,Player player,int time) {
         String blockname = getItemMaterial(e,4).name();
-        if (getItemMaterial(e,10) == Material.RED_WOOL) {
+        if (getItemMaterial(e,10) == Material.REDSTONE_BLOCK) {
             getInstance().getConfig().set("blocks." + blockname + ".replace",false);
         } else getInstance().getConfig().set("blocks." + blockname + ".replace",true);
         getInstance().getConfig().set("blocks." + blockname + ".replaceblock",getItemMaterial(e,11).name());
-        if (getItemMaterial(e,12) == Material.GRASS_BLOCK) {
+        if (getItemMaterial(e,12) == Material.GRASS) {
             getInstance().getConfig().set("blocks." + blockname + ".denyplace",false);
         } else getInstance().getConfig().set("blocks." + blockname + ".denyplace",true);
-        if (getItemMaterial(e,13) == Material.ENCHANTING_TABLE) {
+        if (getItemMaterial(e,13) == Material.ENCHANTMENT_TABLE) {
             getInstance().getConfig().set("blocks." + blockname + ".restore",true);
         } else getInstance().getConfig().set("blocks." + blockname + ".redstore",false);
         if (getItemMaterial(e,14) == Material.CHEST) {

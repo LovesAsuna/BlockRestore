@@ -6,8 +6,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import static org.sct.BlockRestore.Main.variableManager;
-import static org.sct.BlockRestore.manager.VariableManager.*;
+import static org.sct.BlockRestore.Main.*;
 
 public class modify {
     private static String blockname;

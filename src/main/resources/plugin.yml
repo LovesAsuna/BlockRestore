@@ -7,5 +7,5 @@ api-version: 1.13
 commands:
   blockrestore:
     description: 插件主命令
-    usage: "/blr"
+    usage: "/br"
     aliases: [BlockRestore,blockrestore,blr,br]

@@ -6,7 +6,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import static org.sct.BlockRestore.Main.variableManager;
+import static org.sct.BlockRestore.Main.*;
 
 public class setup {
     private static String blockname;
@@ -15,7 +15,7 @@ public class setup {
 
     private void setBlocksetup () {//填充容器
         int slot[] = {0, 1, 2, 3, 5, 6, 7, 8, 9, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26};
-        ItemStack LIME_STAINED_GLASS_PANE = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
+        ItemStack LIME_STAINED_GLASS_PANE = new ItemStack(Material.STAINED_GLASS_PANE);
         invsetup.setItem(4, new ItemStack(Material.getMaterial(blockname)));
         for (int Slot : slot) {
             invsetup.setItem(Slot, LIME_STAINED_GLASS_PANE);

@@ -8,8 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 
-import static org.sct.BlockRestore.Main.variableManager;
-import static org.sct.BlockRestore.manager.VariableManager.getInstance;
+import static org.sct.BlockRestore.Main.*;
 
 public class editor {
     Inventory inveditor = variableManager.getInveditor();
@@ -30,7 +29,7 @@ public class editor {
 
     private void createInventory() {
         int num = getnum();
-        ItemStack glass = new ItemStack(Material.LIGHT_BLUE_STAINED_GLASS_PANE);
+        ItemStack glass = new ItemStack(Material.REDSTONE_BLOCK);
         inveditor = Bukkit.createInventory(null,5 * 9,"§e方块总览");
         int slot[] = {0,1,2,3,4,5,6,7,8,9,17,18,26,27,35,36,37,38,39,40,41,42,43,44};
         for (int Slot : slot) {
