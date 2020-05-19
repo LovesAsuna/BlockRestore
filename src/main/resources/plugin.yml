@@ -1,6 +1,6 @@
 name: BlockRestore
 author: LovesAsuna
-version: 2.0
+version: 3.0
 main: org.sct.BlockRestore.Main
 depend: [EasyLib]
 description: 方块复原
@@ -8,5 +8,5 @@ api-version: 1.13
 commands:
   blockrestore:
     description: 插件主命令
-    usage: "/br"
-    aliases: [BlockRestore,blockrestore,blr,br]
+    usage: "/blockrestore"
+    aliases: [blr,br]

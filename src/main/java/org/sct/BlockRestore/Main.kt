@@ -2,7 +2,8 @@ package org.sct.BlockRestore
 
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
-import org.sct.BlockRestore.commands.blockrestore
+import org.sct.BlockRestore.commands.SubCommandHandler
+import org.sct.BlockRestore.commands.sub.blockrestore
 import org.sct.BlockRestore.data.BlockRestoreData
 import org.sct.BlockRestore.listener.AsyncplayerchatListener
 import org.sct.BlockRestore.listener.BlockBreakListener
@@ -26,7 +27,7 @@ class Main : JavaPlugin() {
         saveDefaultConfig()
         reloadConfig()
         readconfig()
-        Bukkit.getPluginCommand("blr")!!.setExecutor(blockrestore())
+        Bukkit.getPluginCommand("blockrestore")!!.setExecutor(SubCommandHandler(this, "blockrestore"))
     }
 
     private fun registerEvents() {
