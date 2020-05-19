@@ -9,7 +9,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.sct.BlockRestore.Main;
 import org.sct.BlockRestore.data.BlockRestoreData;
-import org.sct.BlockRestore.manager.Timer;
+import org.sct.BlockRestore.util.Timer;
 
 import java.util.Collection;
 import java.util.List;

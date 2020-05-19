@@ -10,7 +10,7 @@ import org.sct.BlockRestore.data.BlockRestoreData;
 import java.util.List;
 
 
-public class blockPlaceListener implements Listener {
+public class BlockPlaceListener implements Listener {
     private List<String> blocklist = BlockRestoreData.INSTANCE.getBlocklist();
 
     @EventHandler

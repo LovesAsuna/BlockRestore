@@ -1,4 +1,4 @@
-package org.sct.BlockRestore.manager;
+package org.sct.BlockRestore.util;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -12,13 +12,13 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Timer {
     private CopyOnWriteArrayList<Location> location = BlockRestoreData.INSTANCE.getLocation();
-    private Map<Location,Material> lt_mr = BlockRestoreData.INSTANCE.getLt_mr();
+    private Map<Location, Material> lt_mr = BlockRestoreData.INSTANCE.getLt_mr();
     private List<String> blocklist = BlockRestoreData.INSTANCE.getBlocklist();
-    private Map<Location,Long> lt_time = BlockRestoreData.INSTANCE.getLt_time();
+    private Map<Location, Long> lt_time = BlockRestoreData.INSTANCE.getLt_time();
 
     public void run() {
-        Bukkit.getScheduler().runTaskTimer(Main.instance,()->{
-            Long nowTime = System.currentTimeMillis()/1000;
+        Bukkit.getScheduler().runTaskTimer(Main.instance, () -> {
+            Long nowTime = System.currentTimeMillis() / 1000;
             for (Location lt : location) {
                 boolean skip = true;//是否跳过坐标
                 Material material = null;//此刻坐标的材质
@@ -44,7 +44,7 @@ public class Timer {
                             if (lt.getBlock().getType() == Material.AIR) {//如果等于空气,恢复成替换方块
                                 //System.out.println("如果等于空气,恢复成替换方块");
                                 lt.getBlock().setType(replace);
-                                lt_time.put(lt,System.currentTimeMillis()/1000);
+                                lt_time.put(lt, System.currentTimeMillis() / 1000);
                             } else if (lt.getBlock().getType() == replace) {//如果等于替换方块,恢复成原始方块
                                 //System.out.println("如果等于替换方块,恢复成原始方块");
                                 lt.getBlock().setType(lt_mr.get(lt));
@@ -52,7 +52,7 @@ public class Timer {
                                 lt_mr.remove(lt);
                                 location.remove(lt);
                             }
-                        } else  {//如果replacerestore关闭
+                        } else {//如果replacerestore关闭
                             if (lt.getBlock().getType() == Material.AIR) {//如果等于空气,恢复成原始方块
                                 lt.getBlock().setType(lt_mr.get(lt));
                                 lt_time.remove(lt);
@@ -63,6 +63,6 @@ public class Timer {
                     }
                 }
             }
-        },0L,20L);//循环1秒执行检测
+        }, 0L, 20L);//循环1秒执行检测
     }
 }
