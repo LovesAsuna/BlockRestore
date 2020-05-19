@@ -7,20 +7,22 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
+import org.sct.BlockRestore.Main;
+import org.sct.BlockRestore.data.BlockRestoreData;
 import org.sct.BlockRestore.manager.Timer;
-import java.util.ArrayList;
+
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import static org.sct.BlockRestore.Main.*;
 
-public class BlockBreak implements Listener {
+public class BlockBreakListener implements Listener {
     private Timer timer;
-    private CopyOnWriteArrayList<Location> location = variableManager.getlocation();
-    private HashMap<Location,Material> lt_mr = variableManager.getlt_mr();
-    private ArrayList<String> blocklist = variableManager.getblocklist();
-    private HashMap<Location,Long> lt_time = variableManager.getlt_time();
+    private CopyOnWriteArrayList<Location> location = BlockRestoreData.INSTANCE.getLocation();
+    private Map<Location, Material> lt_mr = BlockRestoreData.INSTANCE.getLt_mr();
+    private List<String> blocklist = BlockRestoreData.INSTANCE.getBlocklist();
+    private Map<Location, Long> lt_time = BlockRestoreData.INSTANCE.getLt_time();
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
@@ -34,10 +36,10 @@ public class BlockBreak implements Listener {
         for (String block : blocklist) {//遍历配置中的方块类型
             Material material = Material.getMaterial(block);//获得对应的方块类型
             if (mr == material) {//如果破坏方块处与配置中的方块类型匹配
-                lt_mr.put(lt,mr);//存入破坏方块的位置
-                lt_time.put(lt,System.currentTimeMillis()/1000);//存入破坏时的方块时间
+                lt_mr.put(lt, mr);//存入破坏方块的位置
+                lt_time.put(lt, System.currentTimeMillis() / 1000);//存入破坏时的方块时间
                 location.add(lt);//向location的Arraylist存入破坏方块的坐标
-                if (getInstance().getConfig().getBoolean("blocks." + block + ".directgiveitem")) {
+                if (Main.instance.getConfig().getBoolean("blocks." + block + ".directgiveitem")) {
                     Collection<ItemStack> itemStackList = event.getBlock().getDrops();
                     event.getBlock().setType(Material.AIR);
                     for (ItemStack itemStack : itemStackList) {
@@ -46,10 +48,10 @@ public class BlockBreak implements Listener {
 
                 }
 
-                if (getInstance().getConfig().getBoolean("blocks." + mr + ".replace")) {//替换方块
-                    Bukkit.getScheduler().runTaskLater(getInstance(),()->{
-                        lt.getBlock().setType(Material.getMaterial(getInstance().getConfig().getString("blocks." + mr + ".replaceblock")));
-                    },2L);//微延时替换
+                if (Main.instance.getConfig().getBoolean("blocks." + mr + ".replace")) {//替换方块
+                    Bukkit.getScheduler().runTaskLater(Main.instance, () -> {
+                        lt.getBlock().setType(Material.getMaterial(Main.instance.getConfig().getString("blocks." + mr + ".replaceblock")));
+                    }, 2L);//微延时替换
                 }
 
             }

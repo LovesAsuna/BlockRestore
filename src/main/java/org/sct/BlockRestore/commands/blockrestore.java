@@ -19,7 +19,7 @@ public class blockrestore implements CommandExecutor,TabCompleter {
         if (cmd.getName().equalsIgnoreCase("blockrestore")) {
             if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
                 if (sender.isOp()) {
-                    Main.getInstance().initialize();
+                    Main.instance.initialize();
                     sender.sendMessage("§7[§eBlockRestore§7]§2插件重载成功");
                 } else {
                     sender.sendMessage("§7[§eBlockRestore§7]§c你没有此命令的权限");

@@ -1,68 +1,64 @@
-package org.sct.BlockRestore.gui;
+package org.sct.BlockRestore.gui
 
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.Material
+import org.bukkit.inventory.ItemStack
 
-public enum blocks {
-    RED_WOOL(new ItemStack(Material.RED_WOOL)),
-    STONE(new ItemStack(Material.STONE)),
-    GRASS_BLOCK(new ItemStack(Material.GRASS_BLOCK)),
-    ENCHANTING_TABLE(new ItemStack(Material.ENCHANTING_TABLE)),
-    CHEST(new ItemStack(Material.CHEST)),
-    REDSTONE(new ItemStack(Material.REDSTONE)),
-    LEVER(new ItemStack(Material.LEVER)),
-    LIME_WOOL(new ItemStack(Material.LIME_WOOL)),
-    BARRIER(new ItemStack(Material.BARRIER)),
-    CRAFTING_TABLE(new ItemStack(Material.CRAFTING_TABLE)),
-    ENDER_CHEST(new ItemStack(Material.ENDER_CHEST));
+enum class blocks(val itemStack: ItemStack) {
+    RED_WOOL(ItemStack(Material.RED_WOOL)),
+    STONE(ItemStack(Material.STONE)),
+    GRASS_BLOCK(ItemStack(Material.GRASS_BLOCK)),
+    ENCHANTING_TABLE(ItemStack(Material.ENCHANTING_TABLE)),
+    CHEST(ItemStack(Material.CHEST)),
+    REDSTONE(ItemStack(Material.REDSTONE)),
+    LEVER(ItemStack(Material.LEVER)),
+    LIME_WOOL(ItemStack(Material.LIME_WOOL)),
+    BARRIER(ItemStack(Material.BARRIER)),
+    CRAFTING_TABLE(ItemStack(Material.CRAFTING_TABLE)),
+    ENDER_CHEST(ItemStack(Material.ENDER_CHEST));
 
-    private ItemStack itemStack;
-
-    private blocks(ItemStack itemStack) {
-        this.itemStack = itemStack;
-        setItemMeta(this.itemStack);
-    }
-
-    private void setItemMeta(ItemStack itemStack) {
-        ItemMeta itemMeta = this.itemStack.getItemMeta();
-        if (itemStack.getType() == Material.RED_WOOL) {
-            itemMeta.setDisplayName("§c关闭方块替换");
-            this.itemStack.setItemMeta(itemMeta);
-        } else if(itemStack.getType() == Material.STONE) {
-            itemMeta.setDisplayName("§b替换的方块类型");
-            this.itemStack.setItemMeta(itemMeta);
-        } else if (itemStack.getType() == Material.GRASS_BLOCK) {
-            itemMeta.setDisplayName("§b允许放置");
-            this.itemStack.setItemMeta(itemMeta);
-        } else if (itemStack.getType() == Material.ENCHANTING_TABLE) {
-            itemMeta.setDisplayName("§2自动恢复");
-            this.itemStack.setItemMeta(itemMeta);
-        } else if (itemStack.getType() == Material.CHEST) {
-            itemMeta.setDisplayName("§a直接给予物品");
-            this.itemStack.setItemMeta(itemMeta);
-        } else if (itemStack.getType() == Material.REDSTONE) {
-            itemMeta.setDisplayName("§a恢复时长(单位:秒)");
-            this.itemStack.setItemMeta(itemMeta);
-        } else if (itemStack.getType() == Material.LEVER) {
-            itemMeta.setDisplayName("§2完成设置");
-            this.itemStack.setItemMeta(itemMeta);
-        } else if (itemStack.getType() == Material.LIME_WOOL) {
-            itemMeta.setDisplayName("§2开启方块替换");
-            this.itemStack.setItemMeta(itemMeta);
-        } else if (itemStack.getType() == Material.BARRIER) {
-            itemMeta.setDisplayName("§c禁止放置");
-            this.itemStack.setItemMeta(itemMeta);
-        } else if (itemStack.getType() == Material.CRAFTING_TABLE) {
-            itemMeta.setDisplayName("§c禁用自动恢复");
-            this.itemStack.setItemMeta(itemMeta);
-        } else if (itemStack.getType() == Material.ENDER_CHEST) {
-            itemMeta.setDisplayName("§c禁用直接给予物品");
-            this.itemStack.setItemMeta(itemMeta);
+    private fun setItemMeta(item: ItemStack) {
+        var itemMeta = item.itemMeta
+        var name: String? = null
+        when (item.type) {
+            Material.RED_WOOL -> {
+                name = "§c关闭方块替换"
+            }
+            Material.STONE -> {
+                name = "§b替换的方块类型"
+            }
+            Material.GRASS_BLOCK -> {
+                name = "§b允许放置"
+            }
+            Material.ENCHANTING_TABLE -> {
+                name = "§2自动恢复"
+            }
+            Material.CHEST -> {
+                name = "§a直接给予物品"
+            }
+            Material.REDSTONE -> {
+                name = "§a恢复时长(单位:秒)"
+            }
+            Material.LEVER -> {
+                name = "§2完成设置"
+            }
+            Material.LIME_WOOL -> {
+                name = "§2开启方块替换"
+            }
+            Material.BARRIER -> {
+                name = "§c禁止放置"
+            }
+            Material.CRAFTING_TABLE -> {
+                name = "§c禁用自动恢复"
+            }
+            Material.ENDER_CHEST -> {
+                name = "§c禁用直接给予物品"
+            }
         }
+        itemMeta?.setDisplayName(name)
+        item.itemMeta = itemMeta
     }
 
-    public ItemStack getItemStack() {
-        return itemStack;
+    init {
+        setItemMeta(itemStack)
     }
 }

@@ -4,21 +4,20 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.sct.BlockRestore.Main;
+import org.sct.BlockRestore.data.BlockRestoreData;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import static org.sct.BlockRestore.Main.variableManager;
-
 public class Timer {
-    private CopyOnWriteArrayList<Location> location = variableManager.getlocation();
-    private HashMap<Location,Material> lt_mr = variableManager.getlt_mr();
-    private ArrayList<String> blocklist = variableManager.getblocklist();
-    private HashMap<Location,Long> lt_time = variableManager.getlt_time();
+    private CopyOnWriteArrayList<Location> location = BlockRestoreData.INSTANCE.getLocation();
+    private Map<Location,Material> lt_mr = BlockRestoreData.INSTANCE.getLt_mr();
+    private List<String> blocklist = BlockRestoreData.INSTANCE.getBlocklist();
+    private Map<Location,Long> lt_time = BlockRestoreData.INSTANCE.getLt_time();
 
     public void run() {
-        Bukkit.getScheduler().runTaskTimer(Main.getInstance(),()->{
+        Bukkit.getScheduler().runTaskTimer(Main.instance,()->{
             Long nowTime = System.currentTimeMillis()/1000;
             for (Location lt : location) {
                 boolean skip = true;//是否跳过坐标
@@ -32,14 +31,16 @@ public class Timer {
                         skip = false;
                     }
                 }
-                if (skip) continue;//如果不在列表内,跳过此处坐标
-                int time = Main.getInstance().getConfig().getInt("blocks." + material + ".restoretime");
+                if (skip) {
+                    continue;//如果不在列表内,跳过此处坐标
+                }
+                int time = Main.instance.getConfig().getInt("blocks." + material + ".restoretime");
                 System.out.println("blocks." + material + ".restoretime: " + time);
-                Material replace = Material.getMaterial(Main.getInstance().getConfig().getString("blocks." + material + ".replaceblock"));
+                Material replace = Material.getMaterial(Main.instance.getConfig().getString("blocks." + material + ".replaceblock"));
                 if (lt_time.get(lt) != null) {
                     if (nowTime - lt_time.get(lt) + 1 >= time) {//时间大于预设时间
                         //System.out.println("时间大于delay");
-                        if (Main.getInstance().getConfig().getBoolean("blocks." + material + ".replace")) {//如果replacerestore开启
+                        if (Main.instance.getConfig().getBoolean("blocks." + material + ".replace")) {//如果replacerestore开启
                             if (lt.getBlock().getType() == Material.AIR) {//如果等于空气,恢复成替换方块
                                 //System.out.println("如果等于空气,恢复成替换方块");
                                 lt.getBlock().setType(replace);
