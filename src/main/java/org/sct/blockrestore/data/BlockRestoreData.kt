@@ -30,10 +30,6 @@ object BlockRestoreData {
         invsetup = Bukkit.createInventory(null, size, title!!)
     }
 
-    fun settime(time: Int) {
-        this.time = time
-    }
-
     init {
         location = CopyOnWriteArrayList()
         lt_mr = HashMap()

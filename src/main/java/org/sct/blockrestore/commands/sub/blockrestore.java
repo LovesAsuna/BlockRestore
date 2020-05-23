@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
-import org.sct.blockrestore.gui.main;
+import org.sct.blockrestore.gui.MainGUI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +17,8 @@ public class blockrestore implements CommandExecutor, TabCompleter {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (cmd.getName().equalsIgnoreCase("blockrestore")) {
             if (args.length == 1 && args[0].equalsIgnoreCase("main")) {
-                main main = new main();
-                main.openInventory((Player) sender);
+                MainGUI MainGUI = new MainGUI();
+                MainGUI.openInventory((Player) sender);
                 return true;
             }
 

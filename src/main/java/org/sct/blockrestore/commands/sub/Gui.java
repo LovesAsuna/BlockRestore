@@ -2,7 +2,7 @@ package org.sct.blockrestore.commands.sub;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.sct.blockrestore.gui.main;
+import org.sct.blockrestore.gui.MainGUI;
 import org.sct.easylib.util.function.command.SubCommand;
 
 import java.util.Map;
@@ -12,11 +12,10 @@ import java.util.Map;
  * @date 2020/5/19 19:07
  */
 
-public class Main implements SubCommand {
+public class Gui implements SubCommand {
     @Override
     public boolean execute(CommandSender sender, String[] args) {
-        main main = new main();
-        main.openInventory((Player) sender);
+        MainGUI.openInventory((Player) sender);
         return true;
     }
 
