@@ -48,6 +48,9 @@ class TimerUtil {
                                     locationMaterial.remove(lt)
                                     locationList.remove(lt)
                                 }
+                                else -> {
+                                    TODO("被恶意替换方块")
+                                }
                             }
                         } else {
                             /*ReplaceRestore关闭*/
