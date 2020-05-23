@@ -9,7 +9,7 @@ import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.ItemStack
 import org.sct.blockrestore.BlockRestore
 import org.sct.blockrestore.data.BlockRestoreData
-import org.sct.blockrestore.data.BlockRestoreData.time
+import org.sct.blockrestore.data.BlockRestoreData.inputTime
 import org.sct.blockrestore.enumeration.SetupStatus
 import org.sct.blockrestore.gui.Blocks
 import org.sct.blockrestore.gui.editor
@@ -48,24 +48,24 @@ class InventoryClickListener : Listener {
                     11 -> {
                         BlockRestoreData.playerStatus[player] = SetupStatus.REPLACENAME
                         BlockRestoreData.playerChat[player] = true
-                        e.whoClicked.sendMessage("§7[§eBlockRestore§7]§b请输入替换物品的命名空间")
-                        e.whoClicked.closeInventory()
+                        player.sendMessage("§7[§eBlockRestore§7]§b请输入替换物品的命名空间")
+                        player.closeInventory()
                     }
                     15 -> {
                         BlockRestoreData.playerStatus[player] = SetupStatus.RESTORETIME
                         BlockRestoreData.playerChat[player] = true
-                        e.whoClicked.sendMessage("§7[§eBlockRestore§7]§b请输入方块恢复的时间")
-                        e.whoClicked.closeInventory()
+                        player.sendMessage("§7[§eBlockRestore§7]§b请输入方块恢复的时间")
+                        player.closeInventory()
                     }
                     16 -> {
-                        val time = time
+                        val time = inputTime
                         if (time == -1) {
                             player.sendMessage("§7[§eBlockRestore§7]§c尚未定义时间!")
                             e.isCancelled = true
                             return
                         }
                         output(e, player, time)
-                        BlockRestoreData.time = -1
+                        BlockRestoreData.inputTime = -1
                         player.sendMessage("§7[§eBlockRestore§7]§2方块设置成功")
                     }
                 }
@@ -101,7 +101,7 @@ class InventoryClickListener : Listener {
                         player.closeInventory()
                     }
                     16 -> {
-                        val time = time
+                        val time = inputTime
                         output(e, player, time)
                         player.sendMessage("§7[§eBlockRestore§7]§2方块修改成功")
                     }

@@ -17,9 +17,9 @@ object BlockRestoreData {
     var playerChat: MutableMap<Player, Boolean> = HashMap()
     var playerStatus: MutableMap<Player, SetupStatus> = HashMap()
     var blocklist: MutableList<String> = ArrayList()
-    var time: Int = -1
+    var inputTime: Int = -1
     var inputMaterial: Material? = null
-    lateinit var invsetup: Inventory
+    lateinit var blockSetup: Inventory
     lateinit var invmodify: Inventory
     lateinit var inveditor: Inventory
 
@@ -28,8 +28,8 @@ object BlockRestoreData {
     }
 
     fun setBlockSetup(size: Int, title: String) : Inventory{
-        invsetup = Bukkit.createInventory(null, size, title)
-        return invsetup
+        blockSetup = Bukkit.createInventory(null, size, title)
+        return blockSetup
     }
 
 }

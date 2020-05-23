@@ -79,7 +79,7 @@ public class modify {
         invmodify = BlockRestoreData.INSTANCE.getInvmodify();
         ItemStack it = invmodify.getItem(15);
         ItemMeta itm = it.getItemMeta();
-        time = BlockRestoreData.INSTANCE.getTime();
+        time = BlockRestoreData.INSTANCE.getInputTime();
         itm.setDisplayName("§a恢复时长(" + time + "秒)");
         it.setItemMeta(itm);
         invmodify.setItem(15,it);

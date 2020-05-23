@@ -10,13 +10,12 @@ import org.sct.blockrestore.BlockRestore
 import org.sct.blockrestore.data.BlockRestoreData
 import org.sct.blockrestore.enumeration.SetupStatus
 import org.sct.blockrestore.gui.SetupGUI
-import org.sct.blockrestore.gui.modify
+import org.sct.easylib.util.BasicUtil
 
 class AsyncplayerchatListener : Listener {
     private val playerChat = BlockRestoreData.playerChat
     private val playerStatus: Map<Player, SetupStatus> = BlockRestoreData.playerStatus
     private var inputMaterial = BlockRestoreData.inputMaterial
-    private val modify = modify()
 
     @EventHandler
     fun onPlayerChat(e: AsyncPlayerChatEvent) {
@@ -29,18 +28,41 @@ class AsyncplayerchatListener : Listener {
             } else {
                 when (playerStatus[player]) {
                     SetupStatus.ADDNAME -> {
-                        inputMaterial = Material.getMaterial(e.message)
-                        /*判断输入是否有效*/
-                        if (inputMaterial == null) {
-                            player.sendMessage("§c你输入的命名空间有误,请重新输入!")
-                        } else {
-                            playerChat.remove(player)
-                            Bukkit.getScheduler().runTaskLater(BlockRestore.instance, Runnable { SetupGUI.openInventory(player) }, 0L)
-                        }
-                        e.isCancelled = true
+                        openInventory(e, SetupGUI.Type.DEFAULT)
+                    }
+                    SetupStatus.REPLACENAME -> {
+                        openInventory(e, SetupGUI.Type.BLOCK_MODIFY)
+                    }
+                    SetupStatus.RESTORETIME -> {
+                        openInventory(e, SetupGUI.Type.TIME_MODIFY)
                     }
                 }
             }
         }
+    }
+
+    private fun openInventory(e: AsyncPlayerChatEvent, type: SetupGUI.Type) {
+
+        val player = e.player
+        /*判断输入是否有效*/
+        when (type) {
+            SetupGUI.Type.DEFAULT, SetupGUI.Type.BLOCK_MODIFY -> {
+                inputMaterial = Material.getMaterial(e.message.toUpperCase())
+                if (inputMaterial == null) {
+                    player.sendMessage("§c你输入的命名空间有误,请重新输入!")
+                } else {
+                    playerChat.remove(player)
+                    SetupGUI.material = inputMaterial as Material
+                    Bukkit.getScheduler().runTaskLater(BlockRestore.instance, Runnable { SetupGUI.openInventory(player, type) }, 0L)
+                }
+            }
+            SetupGUI.Type.TIME_MODIFY -> {
+                playerChat.remove(player)
+                BlockRestoreData.inputTime = BasicUtil.ExtraceInt(e.message)
+                Bukkit.getScheduler().runTaskLater(BlockRestore.instance, Runnable { SetupGUI.openInventory(player, type) }, 0L)
+            }
+        }
+
+        e.isCancelled = true
     }
 }
