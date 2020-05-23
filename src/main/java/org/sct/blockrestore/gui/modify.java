@@ -29,28 +29,28 @@ public class modify {
         setModify();
         ItemStack row10,row11,row12,row13,row14,row15,row16;
         if (BlockRestore.instance.getConfig().getBoolean("blocks." + blockname + ".replace")) {
-            row10 = blocks.LIME_WOOL.getItemStack();
+            row10 = Blocks.LIME_WOOL.getItemStack();
         } else {
-            row10 = blocks.RED_WOOL.getItemStack();
+            row10 = Blocks.RED_WOOL.getItemStack();
         }
         row11 = new ItemStack(Material.getMaterial(BlockRestore.instance.getConfig().getString("blocks." + blockname + ".replaceblock")));
         if (BlockRestore.instance.getConfig().getBoolean("blocks." + blockname + "denyplace")) {
-            row12 = blocks.BARRIER.getItemStack();
+            row12 = Blocks.BARRIER.getItemStack();
         } else {
-            row12 = blocks.GRASS_BLOCK.getItemStack();
+            row12 = Blocks.GRASS_BLOCK.getItemStack();
         }
         if (BlockRestore.instance.getConfig().getBoolean("blocks." + blockname + ".restore")) {
-            row13 = blocks.ENCHANTING_TABLE.getItemStack();
+            row13 = Blocks.ENCHANTING_TABLE.getItemStack();
         } else {
-            row13 = blocks.CRAFTING_TABLE.getItemStack();
+            row13 = Blocks.CRAFTING_TABLE.getItemStack();
         }
         if (BlockRestore.instance.getConfig().getBoolean("blocks." + blockname + ".directgiveitem")) {
-            row14 = blocks.CHEST.getItemStack();
+            row14 = Blocks.CHEST.getItemStack();
         } else {
-            row14 = blocks.ENDER_CHEST.getItemStack();
+            row14 = Blocks.ENDER_CHEST.getItemStack();
         }
         row15 = new ItemStack(Material.REDSTONE);
-        row16 = blocks.LEVER.getItemStack();
+        row16 = Blocks.LEVER.getItemStack();
         ItemMeta row15m = row15.getItemMeta();
         ItemMeta row16m = row16.getItemMeta();
         row15m.setDisplayName("§a恢复时长(" + BlockRestore.instance.getConfig().getInt("blocks." + blockname + ".restoretime") + "秒)");

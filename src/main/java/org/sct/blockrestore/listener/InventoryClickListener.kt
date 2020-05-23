@@ -10,7 +10,8 @@ import org.bukkit.inventory.ItemStack
 import org.sct.blockrestore.BlockRestore
 import org.sct.blockrestore.data.BlockRestoreData
 import org.sct.blockrestore.data.BlockRestoreData.time
-import org.sct.blockrestore.gui.blocks
+import org.sct.blockrestore.enumeration.SetupStatus
+import org.sct.blockrestore.gui.Blocks
 import org.sct.blockrestore.gui.editor
 import org.sct.blockrestore.gui.modify
 
@@ -27,8 +28,8 @@ class InventoryClickListener : Listener {
             title.equals("§bBlockRestore主菜单", true) -> {
                 when (e.rawSlot) {
                     13 -> {
-                        BlockRestoreData.player_int[player] = 1
-                        BlockRestoreData.player_chat[player] = true
+                        BlockRestoreData.playerStatus[player] = SetupStatus.ADDNAME
+                        BlockRestoreData.playerChat[player] = true
                         player.sendMessage("§7[§eBlockRestore§7]§b请输入添加物品的命名空间")
                         player.closeInventory()
                     }
@@ -45,14 +46,14 @@ class InventoryClickListener : Listener {
                 changeBlock(e)
                 when (e.rawSlot) {
                     11 -> {
-                        BlockRestoreData.player_int[e.whoClicked as Player] = 2
-                        BlockRestoreData.player_chat[e.whoClicked as Player] = true
+                        BlockRestoreData.playerStatus[player] = SetupStatus.REPLACENAME
+                        BlockRestoreData.playerChat[player] = true
                         e.whoClicked.sendMessage("§7[§eBlockRestore§7]§b请输入替换物品的命名空间")
                         e.whoClicked.closeInventory()
                     }
                     15 -> {
-                        BlockRestoreData.player_int[e.whoClicked as Player] = 3
-                        BlockRestoreData.player_chat[e.whoClicked as Player] = true
+                        BlockRestoreData.playerStatus[player] = SetupStatus.RESTORETIME
+                        BlockRestoreData.playerChat[player] = true
                         e.whoClicked.sendMessage("§7[§eBlockRestore§7]§b请输入方块恢复的时间")
                         e.whoClicked.closeInventory()
                     }
@@ -88,14 +89,14 @@ class InventoryClickListener : Listener {
             title.equals("§a编辑器", true) -> {
                 when (e.rawSlot) {
                     11 -> {
-                        BlockRestoreData.player_int[player] = 22
-                        BlockRestoreData.player_chat[player] = true
+                        BlockRestoreData.playerStatus[player] = SetupStatus.REPLACENAME
+                        BlockRestoreData.playerChat[player] = true
                         player.sendMessage("§7[§eBlockRestore§7]§b请输入替换物品的命名空间")
                         player.closeInventory()
                     }
                     15 -> {
-                        BlockRestoreData.player_int[e.whoClicked as Player] = 33
-                        BlockRestoreData.player_chat[e.whoClicked as Player] = true
+                        BlockRestoreData.playerStatus[e.whoClicked as Player] = SetupStatus.RESTORETIME
+                        BlockRestoreData.playerChat[e.whoClicked as Player] = true
                         player.sendMessage("§7[§eBlockRestore§7]§b请输入方块恢复的时间")
                         player.closeInventory()
                     }
@@ -125,29 +126,30 @@ class InventoryClickListener : Listener {
     }
 
     private fun changeBlock(e: InventoryClickEvent) {
-        if (e.rawSlot == 10) {
-            if (getItem(e, 10) == blocks.RED_WOOL.itemStack) {
-                setItem(e, 10, blocks.LIME_WOOL.itemStack)
-            } else {
-                setItem(e, 10, blocks.RED_WOOL.itemStack)
+        when (e.rawSlot) {
+            10 -> {
+                when (getItem(e, 10)) {
+                    Blocks.RED_WOOL.itemStack -> setItem(e, 10, Blocks.LIME_WOOL.itemStack)
+                    else -> setItem(e, 10, Blocks.RED_WOOL.itemStack)
+                }
             }
-        } else if (e.rawSlot == 12) {
-            if (getItem(e, 12) == blocks.GRASS_BLOCK.itemStack) {
-                setItem(e, 12, blocks.BARRIER.itemStack)
-            } else {
-                setItem(e, 12, blocks.GRASS_BLOCK.itemStack)
+            12 -> {
+                when (getItem(e, 12)) {
+                    Blocks.GRASS_BLOCK.itemStack -> setItem(e, 12, Blocks.BARRIER.itemStack)
+                    else -> setItem(e, 12, Blocks.GRASS_BLOCK.itemStack)
+                }
             }
-        } else if (e.rawSlot == 13) {
-            if (getItem(e, 13) == blocks.ENCHANTING_TABLE.itemStack) {
-                setItem(e, 13, blocks.CRAFTING_TABLE.itemStack)
-            } else {
-                setItem(e, 13, blocks.ENCHANTING_TABLE.itemStack)
+            13 -> {
+                when (getItem(e, 13)) {
+                    Blocks.ENCHANTING_TABLE.itemStack -> setItem(e, 13, Blocks.CRAFTING_TABLE.itemStack)
+                    else -> setItem(e, 13, Blocks.ENCHANTING_TABLE.itemStack)
+                }
             }
-        } else if (e.rawSlot == 14) {
-            if (getItem(e, 14) == blocks.CHEST.itemStack) {
-                setItem(e, 14, blocks.ENDER_CHEST.itemStack)
-            } else {
-                setItem(e, 14, blocks.CHEST.itemStack)
+            14 -> {
+                when (getItem(e, 14)) {
+                    Blocks.CHEST.itemStack -> setItem(e, 14, Blocks.ENDER_CHEST.itemStack)
+                    else -> setItem(e, 14, Blocks.CHEST.itemStack)
+                }
             }
         }
     }

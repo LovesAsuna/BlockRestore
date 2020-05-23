@@ -3,7 +3,7 @@ package org.sct.blockrestore.gui
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 
-enum class blocks(val itemStack: ItemStack) {
+enum class Blocks(val itemStack: ItemStack) {
     RED_WOOL(ItemStack(Material.RED_WOOL)),
     STONE(ItemStack(Material.STONE)),
     GRASS_BLOCK(ItemStack(Material.GRASS_BLOCK)),

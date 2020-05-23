@@ -8,65 +8,74 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.sct.blockrestore.data.BlockRestoreData;
 
 public class SetupGUI {
-    private static String blockname;
-    private Inventory invsetup;
+    private static String blockName;
     private int time;
 
-    private void setBlocksetup () {//填充容器
+    /**
+     * 填充容器
+     *
+     * @param inventory 待填充的容器
+     * @return void
+     **/
+    private static void setBlockSetup(Inventory inventory) {
         int[] slot = {0, 1, 2, 3, 5, 6, 7, 8, 9, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26};
         ItemStack LIME_STAINED_GLASS_PANE = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
-        invsetup.setItem(4, new ItemStack(Material.getMaterial(blockname)));
+        inventory.setItem(4, new ItemStack(Material.getMaterial(blockName)));
         for (int Slot : slot) {
-            invsetup.setItem(Slot, LIME_STAINED_GLASS_PANE);
+            inventory.setItem(Slot, LIME_STAINED_GLASS_PANE);
         }
-        invsetup.setItem(10,blocks.RED_WOOL.getItemStack());
-        invsetup.setItem(11,blocks.STONE.getItemStack());
-        invsetup.setItem(12,blocks.GRASS_BLOCK.getItemStack());
-        invsetup.setItem(13,blocks.ENCHANTING_TABLE.getItemStack());
-        invsetup.setItem(14,blocks.CHEST.getItemStack());
-        invsetup.setItem(15,blocks.REDSTONE.getItemStack());
-        invsetup.setItem(16,blocks.LEVER.getItemStack());
+        inventory.setItem(10, Blocks.RED_WOOL.getItemStack());
+        inventory.setItem(11, Blocks.STONE.getItemStack());
+        inventory.setItem(12, Blocks.GRASS_BLOCK.getItemStack());
+        inventory.setItem(13, Blocks.ENCHANTING_TABLE.getItemStack());
+        inventory.setItem(14, Blocks.CHEST.getItemStack());
+        inventory.setItem(15, Blocks.REDSTONE.getItemStack());
+        inventory.setItem(16, Blocks.LEVER.getItemStack());
     }
 
-    public void openinv(Player player, String blockname) {//打开默认容器
-        this.blockname = blockname;
-        BlockRestoreData.INSTANCE.setBlocksetup(3 * 9, "§b方块设置");
-        invsetup = BlockRestoreData.INSTANCE.getInvsetup();
-        setBlocksetup();
-        player.openInventory(invsetup);
+    /**
+     * 打开默认容器
+     *
+     * @param player 打开容器的玩家
+     * @return void
+     **/
+    public static void openInventory(Player player) {
+        Inventory blockSetup = BlockRestoreData.INSTANCE.setBlockSetup(3 * 9, "§b方块设置");
+        setBlockSetup(blockSetup);
+        player.openInventory(blockSetup);
     }
 
     public void openinv_modifyblock(Player player, String replace) {//打开修改方块类型后的容器
-        invsetup = BlockRestoreData.INSTANCE.getInvsetup();
+        Inventory inventory = BlockRestoreData.INSTANCE.getInvsetup();
         ItemStack it = new ItemStack(Material.getMaterial(replace));
         ItemMeta itm = it.getItemMeta();
         itm.setDisplayName("§b替换的方块类型");
         it.setItemMeta(itm);
-        invsetup.setItem(11,it);
-        player.openInventory(invsetup);
+        inventory.setItem(11, it);
+        player.openInventory(inventory);
     }
 
     public void openinv_modifytime(Player player) {//打开修改时间后的容器
-        invsetup = BlockRestoreData.INSTANCE.getInvsetup();
-        ItemStack it = invsetup.getItem(15);
+        Inventory inventory = BlockRestoreData.INSTANCE.getInvsetup();
+        ItemStack it = inventory.getItem(15);
         ItemMeta itm = it.getItemMeta();
         time = BlockRestoreData.INSTANCE.getTime();
         itm.setDisplayName("§a恢复时长(" + time + "秒)");
         it.setItemMeta(itm);
-        invsetup.setItem(15,it);
-        player.openInventory(invsetup);
+        inventory.setItem(15, it);
+        player.openInventory(inventory);
     }
 
     public void clean() {
-        invsetup = BlockRestoreData.INSTANCE.getInvsetup();
-        invsetup = null;
+        Inventory inventory = BlockRestoreData.INSTANCE.getInvsetup();
+        inventory = null;
     }
 
     public String getBlockname() {
-        return blockname;
+        return blockName;
     }
 
     public void setBlockname(String blockname) {
-        this.blockname = blockname;
+        this.blockName = blockname;
     }
 }
