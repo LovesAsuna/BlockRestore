@@ -1,4 +1,4 @@
-package org.sct.BlockRestore.listener;
+package org.sct.blockrestore.listener;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -7,9 +7,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
-import org.sct.BlockRestore.Main;
-import org.sct.BlockRestore.data.BlockRestoreData;
-import org.sct.BlockRestore.util.Timer;
+import org.sct.blockrestore.BlockRestore;
+import org.sct.blockrestore.data.BlockRestoreData;
+import org.sct.blockrestore.util.Timer;
 
 import java.util.Collection;
 import java.util.List;
@@ -39,7 +39,7 @@ public class BlockBreakListener implements Listener {
                 lt_mr.put(lt, mr);//存入破坏方块的位置
                 lt_time.put(lt, System.currentTimeMillis() / 1000);//存入破坏时的方块时间
                 location.add(lt);//向location的Arraylist存入破坏方块的坐标
-                if (Main.instance.getConfig().getBoolean("blocks." + block + ".directgiveitem")) {
+                if (BlockRestore.instance.getConfig().getBoolean("blocks." + block + ".directgiveitem")) {
                     Collection<ItemStack> itemStackList = event.getBlock().getDrops();
                     event.getBlock().setType(Material.AIR);
                     for (ItemStack itemStack : itemStackList) {
@@ -48,9 +48,9 @@ public class BlockBreakListener implements Listener {
 
                 }
 
-                if (Main.instance.getConfig().getBoolean("blocks." + mr + ".replace")) {//替换方块
-                    Bukkit.getScheduler().runTaskLater(Main.instance, () -> {
-                        lt.getBlock().setType(Material.getMaterial(Main.instance.getConfig().getString("blocks." + mr + ".replaceblock")));
+                if (BlockRestore.instance.getConfig().getBoolean("blocks." + mr + ".replace")) {//替换方块
+                    Bukkit.getScheduler().runTaskLater(BlockRestore.instance, () -> {
+                        lt.getBlock().setType(Material.getMaterial(BlockRestore.instance.getConfig().getString("blocks." + mr + ".replaceblock")));
                     }, 2L);//微延时替换
                 }
 

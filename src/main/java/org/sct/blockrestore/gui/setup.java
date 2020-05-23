@@ -1,11 +1,11 @@
-package org.sct.BlockRestore.gui;
+package org.sct.blockrestore.gui;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.sct.BlockRestore.data.BlockRestoreData;
+import org.sct.blockrestore.data.BlockRestoreData;
 
 public class setup {
     private static String blockname;

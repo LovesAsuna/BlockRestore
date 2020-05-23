@@ -1,18 +1,18 @@
-package org.sct.BlockRestore.file;
+package org.sct.blockrestore.file;
 
 import org.bukkit.configuration.file.FileConfiguration;
-import org.sct.BlockRestore.Main;
-import org.sct.BlockRestore.enumeration.ConfigType;
+import org.sct.blockrestore.BlockRestore;
+import org.sct.blockrestore.enumeration.ConfigType;
 
 import java.util.List;
 
 public class Config {
 
-    private static FileConfiguration config = Main.instance.getConfig();
+    private static FileConfiguration config = BlockRestore.instance.getConfig();
 
     public static void loadConfig() {
-        Main.instance.reloadConfig();
-        config = Main.instance.getConfig();
+        BlockRestore.instance.reloadConfig();
+        config = BlockRestore.instance.getConfig();
     }
 
     public static String getString(ConfigType configType) {

@@ -1,4 +1,4 @@
-package org.sct.BlockRestore.enumeration;
+package org.sct.blockrestore.enumeration;
 
 public enum ConfigType {
 

@@ -1,8 +1,8 @@
-package org.sct.BlockRestore.file;
+package org.sct.blockrestore.file;
 
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.sct.BlockRestore.Main;
-import org.sct.BlockRestore.enumeration.LangType;
+import org.sct.blockrestore.BlockRestore;
+import org.sct.blockrestore.enumeration.LangType;
 import org.sct.easylib.util.BasicUtil;
 
 import java.io.File;
@@ -14,8 +14,8 @@ public class Lang {
     private static YamlConfiguration config;
 
     public static void loadLang() {
-        file = new File(Main.instance.getDataFolder() + File.separator + ".yml");
-        if (!file.exists()) { Main.instance.saveResource("lang.yml",false); }
+        file = new File(BlockRestore.instance.getDataFolder() + File.separator + ".yml");
+        if (!file.exists()) { BlockRestore.instance.saveResource("lang.yml",false); }
         config = YamlConfiguration.loadConfiguration(file);
     }
 

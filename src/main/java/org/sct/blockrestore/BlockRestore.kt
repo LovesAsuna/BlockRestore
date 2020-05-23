@@ -1,12 +1,12 @@
-package org.sct.BlockRestore
+package org.sct.blockrestore
 
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
-import org.sct.BlockRestore.commands.SubCommandHandler
-import org.sct.BlockRestore.data.BlockRestoreData
-import org.sct.BlockRestore.util.ListenerManager
+import org.sct.blockrestore.commands.SubCommandHandler
+import org.sct.blockrestore.data.BlockRestoreData
+import org.sct.blockrestore.util.ListenerManager
 
-class Main : JavaPlugin() {
+class BlockRestore : JavaPlugin() {
     val blocklist = BlockRestoreData.blocklist
     override fun onEnable() {
         instance = this
@@ -37,6 +37,6 @@ class Main : JavaPlugin() {
     }
 
     companion object {
-        lateinit var instance : Main
+        lateinit var instance : BlockRestore
     }
 }

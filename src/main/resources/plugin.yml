@@ -1,7 +1,7 @@
 name: BlockRestore
 author: LovesAsuna
 version: 3.0
-main: org.sct.BlockRestore.Main
+main: org.sct.BlockRestore.BlockRestore
 depend: [EasyLib]
 description: 方块复原
 api-version: 1.13

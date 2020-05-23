@@ -1,8 +1,8 @@
-package org.sct.BlockRestore.commands.sub;
+package org.sct.blockrestore.commands.sub;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.sct.BlockRestore.gui.main;
+import org.sct.blockrestore.gui.main;
 import org.sct.easylib.util.function.command.SubCommand;
 
 import java.util.Map;

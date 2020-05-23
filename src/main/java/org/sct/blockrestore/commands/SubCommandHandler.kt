@@ -1,9 +1,9 @@
-package org.sct.BlockRestore.commands
+package org.sct.blockrestore.commands
 
 import org.bukkit.plugin.java.JavaPlugin
-import org.sct.BlockRestore.commands.sub.Info
-import org.sct.BlockRestore.commands.sub.Main
-import org.sct.BlockRestore.commands.sub.Reload
+import org.sct.blockrestore.commands.sub.Info
+import org.sct.blockrestore.commands.sub.Main
+import org.sct.blockrestore.commands.sub.Reload
 import org.sct.easylib.util.function.command.CommandHandler
 
 class SubCommandHandler(instance: JavaPlugin, cmd: String?) : CommandHandler(instance, cmd) {

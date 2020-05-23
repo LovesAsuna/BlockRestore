@@ -1,4 +1,4 @@
-package org.sct.BlockRestore.commands.sub;
+package org.sct.blockrestore.commands.sub;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
-import org.sct.BlockRestore.gui.main;
+import org.sct.blockrestore.gui.main;
 
 import java.util.ArrayList;
 import java.util.List;

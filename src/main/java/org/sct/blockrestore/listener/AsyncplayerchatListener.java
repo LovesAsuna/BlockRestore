@@ -1,4 +1,4 @@
-package org.sct.BlockRestore.listener;
+package org.sct.blockrestore.listener;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -6,10 +6,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.sct.BlockRestore.Main;
-import org.sct.BlockRestore.data.BlockRestoreData;
-import org.sct.BlockRestore.gui.modify;
-import org.sct.BlockRestore.gui.setup;
+import org.sct.blockrestore.BlockRestore;
+import org.sct.blockrestore.data.BlockRestoreData;
+import org.sct.blockrestore.gui.modify;
+import org.sct.blockrestore.gui.setup;
 
 import java.util.Map;
 
@@ -32,7 +32,7 @@ public class AsyncplayerchatListener implements Listener {
                 return;
             } else {
                 if (player_int.get(player) == 3) {
-                    Bukkit.getScheduler().runTaskLater(Main.instance, () -> {
+                    Bukkit.getScheduler().runTaskLater(BlockRestore.instance, () -> {
                         try {//判断输入是否有效
                             BlockRestoreData.INSTANCE.settime(Integer.parseInt(e.getMessage()));
                             setup.openinv_modifytime(player);
@@ -43,7 +43,7 @@ public class AsyncplayerchatListener implements Listener {
                 }
 
                 if (player_int.get(player) == 33) {
-                    Bukkit.getScheduler().runTaskLater(Main.instance, () -> {
+                    Bukkit.getScheduler().runTaskLater(BlockRestore.instance, () -> {
                         try {//判断输入是否有效
                             BlockRestoreData.INSTANCE.settime(Integer.parseInt(e.getMessage()));
                         } catch (Exception ex) {
@@ -60,7 +60,7 @@ public class AsyncplayerchatListener implements Listener {
                         player.sendMessage("§c你输入的命名空间有误,请重新输入!");
                     } else {
                         player_chat.remove(player);
-                        Bukkit.getScheduler().runTaskLater(Main.instance, () -> {
+                        Bukkit.getScheduler().runTaskLater(BlockRestore.instance, () -> {
                             if (player_int.get(player) == 1) {
                                 setup.clean();
                                 setup.openinv(player, e.getMessage());
@@ -78,7 +78,7 @@ public class AsyncplayerchatListener implements Listener {
                         player.sendMessage("§c你输入的命名空间有误,请重新输入!");
                     } else {
                         player_chat.remove(player);
-                        Bukkit.getScheduler().runTaskLater(Main.instance, () -> {
+                        Bukkit.getScheduler().runTaskLater(BlockRestore.instance, () -> {
                             if (player_int.get(player) == 11) {
                                 modify.clean();
                                 modify.openinv(player, e.getMessage());

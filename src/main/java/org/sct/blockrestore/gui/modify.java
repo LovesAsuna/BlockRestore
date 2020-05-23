@@ -1,12 +1,12 @@
-package org.sct.BlockRestore.gui;
+package org.sct.blockrestore.gui;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.sct.BlockRestore.Main;
-import org.sct.BlockRestore.data.BlockRestoreData;
+import org.sct.blockrestore.BlockRestore;
+import org.sct.blockrestore.data.BlockRestoreData;
 
 public class modify {
     private static String blockname;
@@ -28,23 +28,23 @@ public class modify {
         invmodify = BlockRestoreData.INSTANCE.getInvmodify();
         setModify();
         ItemStack row10,row11,row12,row13,row14,row15,row16;
-        if (Main.instance.getConfig().getBoolean("blocks." + blockname + ".replace")) {
+        if (BlockRestore.instance.getConfig().getBoolean("blocks." + blockname + ".replace")) {
             row10 = blocks.LIME_WOOL.getItemStack();
         } else {
             row10 = blocks.RED_WOOL.getItemStack();
         }
-        row11 = new ItemStack(Material.getMaterial(Main.instance.getConfig().getString("blocks." + blockname + ".replaceblock")));
-        if (Main.instance.getConfig().getBoolean("blocks." + blockname + "denyplace")) {
+        row11 = new ItemStack(Material.getMaterial(BlockRestore.instance.getConfig().getString("blocks." + blockname + ".replaceblock")));
+        if (BlockRestore.instance.getConfig().getBoolean("blocks." + blockname + "denyplace")) {
             row12 = blocks.BARRIER.getItemStack();
         } else {
             row12 = blocks.GRASS_BLOCK.getItemStack();
         }
-        if (Main.instance.getConfig().getBoolean("blocks." + blockname + ".restore")) {
+        if (BlockRestore.instance.getConfig().getBoolean("blocks." + blockname + ".restore")) {
             row13 = blocks.ENCHANTING_TABLE.getItemStack();
         } else {
             row13 = blocks.CRAFTING_TABLE.getItemStack();
         }
-        if (Main.instance.getConfig().getBoolean("blocks." + blockname + ".directgiveitem")) {
+        if (BlockRestore.instance.getConfig().getBoolean("blocks." + blockname + ".directgiveitem")) {
             row14 = blocks.CHEST.getItemStack();
         } else {
             row14 = blocks.ENDER_CHEST.getItemStack();
@@ -53,7 +53,7 @@ public class modify {
         row16 = blocks.LEVER.getItemStack();
         ItemMeta row15m = row15.getItemMeta();
         ItemMeta row16m = row16.getItemMeta();
-        row15m.setDisplayName("§a恢复时长(" + Main.instance.getConfig().getInt("blocks." + blockname + ".restoretime") + "秒)");
+        row15m.setDisplayName("§a恢复时长(" + BlockRestore.instance.getConfig().getInt("blocks." + blockname + ".restoretime") + "秒)");
         row15.setItemMeta(row15m);
         invmodify.setItem(10,row10);
         invmodify.setItem(11,row11);

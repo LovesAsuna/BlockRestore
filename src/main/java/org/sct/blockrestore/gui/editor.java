@@ -1,4 +1,4 @@
-package org.sct.BlockRestore.gui;
+package org.sct.blockrestore.gui;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -6,8 +6,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.sct.BlockRestore.Main;
-import org.sct.BlockRestore.data.BlockRestoreData;
+import org.sct.blockrestore.BlockRestore;
+import org.sct.blockrestore.data.BlockRestoreData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,11 +47,11 @@ public class editor {
             ItemMeta itemMeta = itemStack.getItemMeta();
             ArrayList<String> lore = new ArrayList<>();
             lore.add("§breplace: " + status("blocks." + block + ".replace"));
-            lore.add("§breplaceblock: §e" + Main.instance.getConfig().getString("blocks." + block + ".replaceblock"));
+            lore.add("§breplaceblock: §e" + BlockRestore.instance.getConfig().getString("blocks." + block + ".replaceblock"));
             lore.add("§bdenyplace: " + status("blocks." + block + ".denyplace"));
             lore.add("§brestore: " + status("blocks." + block + ".restore"));
             lore.add("§bdirectgiveitem: " + status("blocks." + block + ".directgiveitem"));
-            lore.add("§brestore: §e" + Main.instance.getConfig().getInt("blocks." + block + ".restoretime"));
+            lore.add("§brestore: §e" + BlockRestore.instance.getConfig().getInt("blocks." + block + ".restoretime"));
             itemMeta.setLore(lore);
             itemStack.setItemMeta(itemMeta);
             inveditor.setItem(s, itemStack);
@@ -60,7 +60,7 @@ public class editor {
     }
 
     private String status(String path) {
-        if (Main.instance.getConfig().getBoolean(path)) {
+        if (BlockRestore.instance.getConfig().getBoolean(path)) {
             return "§atrue";
         } else {
             return "§cfalse";

@@ -1,4 +1,4 @@
-package org.sct.BlockRestore.data
+package org.sct.blockrestore.data
 
 import org.bukkit.Bukkit
 import org.bukkit.Location

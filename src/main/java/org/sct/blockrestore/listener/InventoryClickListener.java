@@ -1,4 +1,4 @@
-package org.sct.BlockRestore.listener;
+package org.sct.blockrestore.listener;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -7,11 +7,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
-import org.sct.BlockRestore.Main;
-import org.sct.BlockRestore.data.BlockRestoreData;
-import org.sct.BlockRestore.gui.blocks;
-import org.sct.BlockRestore.gui.editor;
-import org.sct.BlockRestore.gui.modify;
+import org.sct.blockrestore.BlockRestore;
+import org.sct.blockrestore.data.BlockRestoreData;
+import org.sct.blockrestore.gui.blocks;
+import org.sct.blockrestore.gui.editor;
+import org.sct.blockrestore.gui.modify;
 
 import java.util.Map;
 
@@ -34,7 +34,7 @@ public class InventoryClickListener implements Listener {
             }
             if (e.getRawSlot() == 14) {
                 player.closeInventory();
-                Bukkit.getScheduler().runTaskLater(Main.instance, () -> {
+                Bukkit.getScheduler().runTaskLater(BlockRestore.instance, () -> {
                     new editor().openInventory(player);
                 }, 1L);
             }
@@ -72,7 +72,7 @@ public class InventoryClickListener implements Listener {
         if (e.getWhoClicked().getOpenInventory().getTitle().equalsIgnoreCase("§e方块总览")) {
             if (e.getCurrentItem() == null) return;
             if (e.getCurrentItem().getType() != Material.REDSTONE_BLOCK) {
-                Bukkit.getScheduler().runTaskLater(Main.instance, () -> {
+                Bukkit.getScheduler().runTaskLater(BlockRestore.instance, () -> {
                     modify modify = new modify();
                     modify.clean();
                     ;
@@ -148,29 +148,29 @@ public class InventoryClickListener implements Listener {
     private void output(InventoryClickEvent e, Player player, int time) {
         String blockname = getItemMaterial(e, 4).name();
         if (getItemMaterial(e, 10) == Material.REDSTONE_BLOCK) {
-            Main.instance.getConfig().set("blocks." + blockname + ".replace", false);
+            BlockRestore.instance.getConfig().set("blocks." + blockname + ".replace", false);
         } else {
-            Main.instance.getConfig().set("blocks." + blockname + ".replace", true);
+            BlockRestore.instance.getConfig().set("blocks." + blockname + ".replace", true);
         }
-        Main.instance.getConfig().set("blocks." + blockname + ".replaceblock", getItemMaterial(e, 11).name());
+        BlockRestore.instance.getConfig().set("blocks." + blockname + ".replaceblock", getItemMaterial(e, 11).name());
         if (getItemMaterial(e, 12) == Material.GRASS) {
-            Main.instance.getConfig().set("blocks." + blockname + ".denyplace", false);
+            BlockRestore.instance.getConfig().set("blocks." + blockname + ".denyplace", false);
         } else {
-            Main.instance.getConfig().set("blocks." + blockname + ".denyplace", true);
+            BlockRestore.instance.getConfig().set("blocks." + blockname + ".denyplace", true);
         }
         if (getItemMaterial(e, 13) == Material.ENCHANTING_TABLE) {
-            Main.instance.getConfig().set("blocks." + blockname + ".restore", true);
+            BlockRestore.instance.getConfig().set("blocks." + blockname + ".restore", true);
         } else {
-            Main.instance.getConfig().set("blocks." + blockname + ".redstore", false);
+            BlockRestore.instance.getConfig().set("blocks." + blockname + ".redstore", false);
         }
         if (getItemMaterial(e, 14) == Material.CHEST) {
-            Main.instance.getConfig().set("blocks." + blockname + ".directgiveitem", true);
+            BlockRestore.instance.getConfig().set("blocks." + blockname + ".directgiveitem", true);
         } else {
-            Main.instance.getConfig().set("blocks." + blockname + ".directgiveitem", false);
+            BlockRestore.instance.getConfig().set("blocks." + blockname + ".directgiveitem", false);
         }
-        Main.instance.getConfig().set("blocks." + blockname + ".restoretime", time);
-        Main.instance.saveConfig();
+        BlockRestore.instance.getConfig().set("blocks." + blockname + ".restoretime", time);
+        BlockRestore.instance.saveConfig();
         player.closeInventory();
-        Main.instance.initialize();
+        BlockRestore.instance.initialize();
     }
 }
