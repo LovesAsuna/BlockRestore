@@ -153,29 +153,29 @@ class InventoryClickListener : Listener {
     }
 
     private fun outPut(e: InventoryClickEvent, player: Player, time: Int) {
-        val blockname = getItemMaterial(e, 4).name
+        val blockName = getItemMaterial(e, 4).name
         when (getItemMaterial(e, 10)) {
-            Material.REDSTONE_BLOCK -> BlockRestore.instance.config["blocks.$blockname.replace"] = false
-            else -> BlockRestore.instance.config["blocks.$blockname.replace"] = true
+            Material.REDSTONE_BLOCK -> BlockRestore.instance.config["Blocks.$blockName.Replace"] = false
+            else -> BlockRestore.instance.config["Blocks.$blockName.Replace"] = true
         }
 
-        BlockRestore.instance.config["blocks.$blockname.replaceblock"] = getItemMaterial(e, 11).name
+        BlockRestore.instance.config["Blocks.$blockName.ReplaceBlock"] = getItemMaterial(e, 11).name
 
         when (getItemMaterial(e, 12)) {
-            Material.GRASS -> BlockRestore.instance.config["blocks.$blockname.denyplace"] = false
-            else -> BlockRestore.instance.config["blocks.$blockname.denyplace"] = true
+            Material.GRASS -> BlockRestore.instance.config["Blocks.$blockName.DenyPlace"] = false
+            else -> BlockRestore.instance.config["Blocks.$blockName.denyplace"] = true
         }
 
         when (getItemMaterial(e, 13)) {
-            Material.ENCHANTING_TABLE -> BlockRestore.instance.config["blocks.$blockname.restore"] = true
-            else -> BlockRestore.instance.config["blocks.$blockname.redstore"] = false
+            Material.ENCHANTING_TABLE -> BlockRestore.instance.config["Blocks.$blockName.Restore"] = true
+            else -> BlockRestore.instance.config["Blocks.$blockName.Restore"] = false
         }
 
         when (getItemMaterial(e, 14)) {
-            Material.CHEST -> BlockRestore.instance.config["blocks.$blockname.directgiveitem"] = true
-            else -> BlockRestore.instance.config["blocks.$blockname.directgiveitem"] = false
+            Material.CHEST -> BlockRestore.instance.config["Blocks.$blockName.DirectGiveItem"] = true
+            else -> BlockRestore.instance.config["Blocks.$blockName.DirectGiveItem"] = false
         }
-        BlockRestore.instance.config["blocks.$blockname.restoretime"] = time
+        BlockRestore.instance.config["Blocks.$blockName.RestoreTime"] = time
         BlockRestore.instance.saveConfig()
         player.closeInventory()
     }

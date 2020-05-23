@@ -37,16 +37,16 @@ class BlockBreakListener : Listener {
                 /*向location的Arraylist存入破坏方块的坐标*/
                 locationList.add(location)
                 /*直接给予物品不掉落方块*/
-                if (instance.config.getBoolean("blocks.$block.directgiveitem")) {
+                if (instance.config.getBoolean("Blocks.$block.DirectGiveItem")) {
                     event.block.type = Material.AIR
                     event.block.drops.forEach {
                         player.inventory.addItem(it)
                     }
                 }
                 /*替换方块*/
-                if (instance.config.getBoolean("blocks.$material.replace")) {
+                if (instance.config.getBoolean("Blocks.$material.Replace")) {
                     Bukkit.getScheduler().runTaskLater(instance, Runnable {
-                        location.block.type = Material.getMaterial(instance.config.getString("blocks.$material.replaceblock")!!)!!
+                        location.block.type = Material.getMaterial(instance.config.getString("Blocks.$material.ReplaceBlock")!!)!!
                     }, 2L) //微延时替换
                 }
             }
