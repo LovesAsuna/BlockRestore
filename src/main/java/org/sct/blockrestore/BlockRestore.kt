@@ -2,6 +2,7 @@ package org.sct.blockrestore
 
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
+import org.bukkit.scheduler.BukkitTask
 import org.sct.blockrestore.commands.SubCommandHandler
 import org.sct.blockrestore.data.BlockRestoreData.blockList
 import org.sct.blockrestore.data.BlockRestoreData.pool
@@ -11,6 +12,7 @@ import org.sct.easylib.util.plugin.CheckUpdate
 import org.sct.easylib.util.plugin.FileUpdate
 
 class BlockRestore : JavaPlugin() {
+    private lateinit var task: BukkitTask
     override fun onEnable() {
         instance = this
         saveDefaultConfig()
@@ -23,11 +25,12 @@ class BlockRestore : JavaPlugin() {
         ListenerManager.register()
         server.consoleSender.sendMessage("§7[§eBlockRestore§7]§2插件已加载")
         Bukkit.getPluginCommand("blockrestore")!!.setExecutor(SubCommandHandler(this, "blockrestore"))
-        TimerUtil.run()
+        task = TimerUtil.run()
     }
 
     override fun onDisable() {
         server.consoleSender.sendMessage("§7[§eBlockRestore§7]§c插件已卸载")
+        task.cancel()
     }
 
     companion object {

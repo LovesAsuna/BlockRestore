@@ -2,6 +2,7 @@ package org.sct.blockrestore.util
 
 import org.bukkit.Bukkit
 import org.bukkit.Material
+import org.bukkit.scheduler.BukkitTask
 import org.sct.blockrestore.BlockRestore.Companion.instance
 import org.sct.blockrestore.data.BlockRestoreData.blockList
 import org.sct.blockrestore.data.BlockRestoreData.locationList
@@ -9,8 +10,8 @@ import org.sct.blockrestore.data.BlockRestoreData.locationMaterial
 import org.sct.blockrestore.data.BlockRestoreData.locationTime
 
 object TimerUtil {
-    fun run() {
-        Bukkit.getScheduler().runTaskTimer(instance, Runnable {
+    fun run(): BukkitTask {
+        return Bukkit.getScheduler().runTaskTimer(instance, Runnable {
             val nowTime = System.currentTimeMillis() / 1000
             for (location in locationList) {
                 /*是否跳过坐标*/
