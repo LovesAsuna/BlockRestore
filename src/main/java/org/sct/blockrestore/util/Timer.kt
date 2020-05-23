@@ -27,7 +27,6 @@ class Timer {
                     continue  //如果不在列表内,跳过此处坐标
                 }
                 val time = BlockRestore.instance.config.getInt("blocks.$material.restoretime")
-                println("blocks.$material.restoretime: $time")
                 val replace = Material.getMaterial(BlockRestore.instance.config.getString("blocks.$material.replaceblock")!!)
                 if (locationTime[lt] != null) {
                     if (nowTime - locationTime[lt]!! + 1 >= time) { //时间大于预设时间
