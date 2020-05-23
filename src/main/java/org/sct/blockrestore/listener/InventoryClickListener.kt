@@ -20,7 +20,6 @@ class InventoryClickListener : Listener {
     @EventHandler
     fun onInventoryClick(e: InventoryClickEvent) {
         val player = e.whoClicked as Player
-
         val title = e.whoClicked.openInventory.title
 
         /*主菜单*/
@@ -64,8 +63,8 @@ class InventoryClickListener : Listener {
                             e.isCancelled = true
                             return
                         }
-                        output(e, player, time)
-                        BlockRestoreData.inputTime = -1
+                        outPut(e, player, time)
+                        inputTime = -1
                         player.sendMessage("§7[§eBlockRestore§7]§2方块设置成功")
                     }
                 }
@@ -102,7 +101,7 @@ class InventoryClickListener : Listener {
                     }
                     16 -> {
                         val time = inputTime
-                        output(e, player, time)
+                        outPut(e, player, time)
                         player.sendMessage("§7[§eBlockRestore§7]§2方块修改成功")
                     }
                 }
@@ -118,7 +117,7 @@ class InventoryClickListener : Listener {
     }
 
     private fun getItemMaterial(e: InventoryClickEvent, slot: Int): Material {
-        return e.whoClicked.openInventory.getItem(slot)!!.type
+        return getItem(e, slot)!!.type
     }
 
     private fun setItem(e: InventoryClickEvent, slot: Int, itemStack: ItemStack) {
@@ -154,32 +153,31 @@ class InventoryClickListener : Listener {
         }
     }
 
-    private fun output(e: InventoryClickEvent, player: Player, time: Int) {
+    private fun outPut(e: InventoryClickEvent, player: Player, time: Int) {
         val blockname = getItemMaterial(e, 4).name
-        if (getItemMaterial(e, 10) == Material.REDSTONE_BLOCK) {
-            BlockRestore.instance.config["blocks.$blockname.replace"] = false
-        } else {
-            BlockRestore.instance.config["blocks.$blockname.replace"] = true
+        when (getItemMaterial(e, 10)) {
+            Material.REDSTONE_BLOCK -> BlockRestore.instance.config["blocks.$blockname.replace"] = false
+            else -> BlockRestore.instance.config["blocks.$blockname.replace"] = true
         }
+
         BlockRestore.instance.config["blocks.$blockname.replaceblock"] = getItemMaterial(e, 11).name
-        if (getItemMaterial(e, 12) == Material.GRASS) {
-            BlockRestore.instance.config["blocks.$blockname.denyplace"] = false
-        } else {
-            BlockRestore.instance.config["blocks.$blockname.denyplace"] = true
+
+        when (getItemMaterial(e, 12)) {
+            Material.GRASS -> BlockRestore.instance.config["blocks.$blockname.denyplace"] = false
+            else -> BlockRestore.instance.config["blocks.$blockname.denyplace"] = true
         }
-        if (getItemMaterial(e, 13) == Material.ENCHANTING_TABLE) {
-            BlockRestore.instance.config["blocks.$blockname.restore"] = true
-        } else {
-            BlockRestore.instance.config["blocks.$blockname.redstore"] = false
+
+        when (getItemMaterial(e, 13)) {
+            Material.ENCHANTING_TABLE -> BlockRestore.instance.config["blocks.$blockname.restore"] = true
+            else -> BlockRestore.instance.config["blocks.$blockname.redstore"] = false
         }
-        if (getItemMaterial(e, 14) == Material.CHEST) {
-            BlockRestore.instance.config["blocks.$blockname.directgiveitem"] = true
-        } else {
-            BlockRestore.instance.config["blocks.$blockname.directgiveitem"] = false
+
+        when (getItemMaterial(e, 14)) {
+            Material.CHEST -> BlockRestore.instance.config["blocks.$blockname.directgiveitem"] = true
+            else -> BlockRestore.instance.config["blocks.$blockname.directgiveitem"] = false
         }
         BlockRestore.instance.config["blocks.$blockname.restoretime"] = time
         BlockRestore.instance.saveConfig()
         player.closeInventory()
-        BlockRestore.instance.initialize()
     }
 }
