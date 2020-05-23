@@ -21,6 +21,7 @@ class BlockBreakListener : Listener {
             timer = Timer()
             timer!!.run()
         }
+        val player = event.player
         val location = event.block.location
         val material = event.block.type
         /*遍历配置中的方块类型*/
@@ -38,7 +39,9 @@ class BlockBreakListener : Listener {
                 /*直接给予物品不掉落方块*/
                 if (instance.config.getBoolean("blocks.$block.directgiveitem")) {
                     event.block.type = Material.AIR
-                    event.block.drops.forEach(event.player.inventory::addItem)
+                    event.block.drops.forEach {
+                        player.inventory.addItem(it)
+                    }
                 }
                 /*替换方块*/
                 if (instance.config.getBoolean("blocks.$material.replace")) {
