@@ -2,7 +2,6 @@ package org.sct.blockrestore.util
 
 import org.bukkit.Bukkit
 import org.bukkit.Material
-import org.sct.blockrestore.BlockRestore
 import org.sct.blockrestore.BlockRestore.Companion.instance
 import org.sct.blockrestore.data.BlockRestoreData.blockList
 import org.sct.blockrestore.data.BlockRestoreData.locationList
