@@ -9,7 +9,7 @@ import org.sct.blockrestore.data.BlockRestoreData.locationList
 import org.sct.blockrestore.data.BlockRestoreData.locationMaterial
 import org.sct.blockrestore.data.BlockRestoreData.locationTime
 
-class Timer {
+class TimerUtil {
     fun run() {
         Bukkit.getScheduler().runTaskTimer(instance, Runnable {
             val nowTime = System.currentTimeMillis() / 1000

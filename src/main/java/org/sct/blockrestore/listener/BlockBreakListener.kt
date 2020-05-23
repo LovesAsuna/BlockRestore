@@ -10,16 +10,16 @@ import org.sct.blockrestore.data.BlockRestoreData.blockList
 import org.sct.blockrestore.data.BlockRestoreData.locationList
 import org.sct.blockrestore.data.BlockRestoreData.locationMaterial
 import org.sct.blockrestore.data.BlockRestoreData.locationTime
-import org.sct.blockrestore.util.Timer
+import org.sct.blockrestore.util.TimerUtil
 
 class BlockBreakListener : Listener {
-    private var timer: Timer? = null
+    private var timerUtil: TimerUtil? = null
 
     @EventHandler
     fun onBlockBreak(event: BlockBreakEvent) {
-        if (timer == null) {
-            timer = Timer()
-            timer!!.run()
+        if (timerUtil == null) {
+            timerUtil = TimerUtil()
+            timerUtil!!.run()
         }
         val player = event.player
         val location = event.block.location
