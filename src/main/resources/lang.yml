@@ -1,0 +1,9 @@
+Language:
+  # 没有权限
+  NoPermission: "&7[&eBlockRestore&7]&c你没有权限操作"
+  # 非玩家提示
+  NotAPlayer: "&7[&eBlockRestore&7]&c你不是一名玩家"
+  # 命令参数错误
+  CommandError: "&7[&eBlockRestore&7]&c你输入的命令不正确!"
+  # 重载成功
+  Reload: "&7[&eBlockRestore&7]&2插件配置重载成功"

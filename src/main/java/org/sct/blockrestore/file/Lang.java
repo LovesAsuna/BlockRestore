@@ -14,7 +14,7 @@ public class Lang {
     private static YamlConfiguration config;
 
     public static void loadLang() {
-        file = new File(BlockRestore.instance.getDataFolder() + File.separator + ".yml");
+        file = new File(BlockRestore.instance.getDataFolder() + File.separator + "lang.yml");
         if (!file.exists()) { BlockRestore.instance.saveResource("lang.yml",false); }
         config = YamlConfiguration.loadConfiguration(file);
     }

@@ -19,6 +19,7 @@ public class Reload implements SubCommand {
 
         Lang.loadLang();
         BlockRestore.instance.saveDefaultConfig();
+        BlockRestore.Companion.readConfig();
         Config.loadConfig();
 
         sender.sendMessage(Lang.getString(LangType.LANG_RELOAD));

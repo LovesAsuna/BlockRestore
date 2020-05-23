@@ -4,14 +4,22 @@ import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 import org.sct.blockrestore.commands.SubCommandHandler
 import org.sct.blockrestore.data.BlockRestoreData.blockList
+import org.sct.blockrestore.data.BlockRestoreData.pool
 import org.sct.blockrestore.util.ListenerManager
 import org.sct.blockrestore.util.TimerUtil
+import org.sct.easylib.util.plugin.CheckUpdate
+import org.sct.easylib.util.plugin.FileUpdate
 
 class BlockRestore : JavaPlugin() {
     override fun onEnable() {
         instance = this
         saveDefaultConfig()
         readConfig()
+        pool.submit {
+            FileUpdate.update(instance, "config.yml", dataFolder.path)
+            FileUpdate.update(instance, "lang.yml", dataFolder.path)
+            CheckUpdate.check(Bukkit.getConsoleSender(), instance, "LovesAsuna", "ZDRlZWY4ZDZlMzIyNDExYjk3NThlMGNiN2ZmYzg3NTRiOGIwZDUzZA==")
+        }
         ListenerManager.register()
         server.consoleSender.sendMessage("§7[§eBlockRestore§7]§2插件已加载")
         Bukkit.getPluginCommand("blockrestore")!!.setExecutor(SubCommandHandler(this, "blockrestore"))

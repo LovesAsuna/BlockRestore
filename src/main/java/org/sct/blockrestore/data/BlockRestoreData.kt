@@ -6,8 +6,12 @@ import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory
 import org.sct.blockrestore.enumeration.Status
+import org.sct.blockrestore.util.BlockRestoreThreadFactory
 import java.util.*
+import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.CopyOnWriteArrayList
+import java.util.concurrent.ThreadPoolExecutor
+import java.util.concurrent.TimeUnit
 import kotlin.collections.HashMap
 
 object BlockRestoreData {
@@ -22,6 +26,7 @@ object BlockRestoreData {
     lateinit var blockSetup: Inventory
     lateinit var modify: Inventory
     lateinit var overview: Inventory
+    val pool = ThreadPoolExecutor(10, 25, 5, TimeUnit.MINUTES, ArrayBlockingQueue(100), BlockRestoreThreadFactory("[BlockRestore]"))
 
     fun createModify(size: Int, title: String) : Inventory{
         modify = Bukkit.createInventory(null, size, title)

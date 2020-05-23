@@ -4,7 +4,6 @@ import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
-import org.sct.blockrestore.BlockRestore
 import org.sct.blockrestore.BlockRestore.Companion.instance
 import org.sct.blockrestore.BlockRestore.Companion.readConfig
 import org.sct.blockrestore.data.BlockRestoreData.blockList
