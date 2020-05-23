@@ -11,9 +11,9 @@ import java.util.concurrent.CopyOnWriteArrayList
 import kotlin.collections.HashMap
 
 object BlockRestoreData {
-    var location: CopyOnWriteArrayList<Location> = CopyOnWriteArrayList()
-    var lt_mr: MutableMap<Location, Material> = HashMap()
-    var lt_time: MutableMap<Location, Long> = HashMap()
+    var locationList: CopyOnWriteArrayList<Location> = CopyOnWriteArrayList()
+    var locationMaterial: MutableMap<Location, Material> = HashMap()
+    var locationTime: MutableMap<Location, Long> = HashMap()
     var playerChat: MutableMap<Player, Boolean> = HashMap()
     var playerStatus: MutableMap<Player, SetupStatus> = HashMap()
     var blockList: MutableList<String> = ArrayList()
