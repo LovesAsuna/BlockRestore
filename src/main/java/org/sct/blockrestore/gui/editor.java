@@ -15,7 +15,7 @@ import java.util.List;
 
 public class editor {
     Inventory inveditor = BlockRestoreData.INSTANCE.getInveditor();
-    private List<String> blocklist = BlockRestoreData.INSTANCE.getBlocklist();
+    private List<String> blocklist = BlockRestoreData.INSTANCE.getBlockList();
 
     public void openInventory(Player player) {
         createInventory();

@@ -8,6 +8,7 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.AsyncPlayerChatEvent
 import org.sct.blockrestore.BlockRestore
 import org.sct.blockrestore.data.BlockRestoreData
+import org.sct.blockrestore.data.BlockRestoreData.inputTime
 import org.sct.blockrestore.enumeration.SetupStatus
 import org.sct.blockrestore.gui.SetupGUI
 import org.sct.easylib.util.BasicUtil
@@ -58,7 +59,7 @@ class AsyncplayerchatListener : Listener {
             }
             SetupGUI.Type.TIME_MODIFY -> {
                 playerChat.remove(player)
-                BlockRestoreData.inputTime = BasicUtil.ExtraceInt(e.message)
+                inputTime = BasicUtil.ExtraceInt(e.message)
                 Bukkit.getScheduler().runTaskLater(BlockRestore.instance, Runnable { SetupGUI.openInventory(player, type) }, 0L)
             }
         }

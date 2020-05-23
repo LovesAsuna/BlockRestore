@@ -11,7 +11,7 @@ import java.util.List;
 
 
 public class BlockPlaceListener implements Listener {
-    private List<String> blocklist = BlockRestoreData.INSTANCE.getBlocklist();
+    private List<String> blocklist = BlockRestoreData.INSTANCE.getBlockList();
 
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent e) {

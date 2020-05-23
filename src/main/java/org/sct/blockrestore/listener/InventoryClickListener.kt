@@ -71,21 +71,9 @@ class InventoryClickListener : Listener {
                 e.isCancelled = true
             }
 
-            /*editor*/
-            title.equals("§e方块总览", true) -> {
-                if (e.currentItem == null) return
-                if (e.currentItem!!.type != Material.REDSTONE_BLOCK) {
-                    Bukkit.getScheduler().runTaskLater(BlockRestore.instance, Runnable {
-                        val modify = modify()
-                        modify.clean()
-                        modify.openinv(player, e.currentItem!!.type.name)
-                    }, 1L)
-                }
-                e.isCancelled = true
-            }
-
             /*modify*/
             title.equals("§a编辑器", true) -> {
+                changeBlock(e)
                 when (e.rawSlot) {
                     11 -> {
                         BlockRestoreData.playerStatus[player] = SetupStatus.REPLACENAME
@@ -100,12 +88,23 @@ class InventoryClickListener : Listener {
                         player.closeInventory()
                     }
                     16 -> {
-                        val time = inputTime
-                        outPut(e, player, time)
+                        outPut(e, player, inputTime)
                         player.sendMessage("§7[§eBlockRestore§7]§2方块修改成功")
                     }
                 }
-                changeBlock(e)
+                e.isCancelled = true
+            }
+
+            /*editor*/
+            title.equals("§e方块总览", true) -> {
+                if (e.currentItem == null) return
+                if (e.currentItem!!.type != Material.REDSTONE_BLOCK) {
+                    Bukkit.getScheduler().runTaskLater(BlockRestore.instance, Runnable {
+                        val modify = modify()
+                        modify.clean()
+                        modify.openinv(player, e.currentItem!!.type.name)
+                    }, 1L)
+                }
                 e.isCancelled = true
             }
 

@@ -16,7 +16,7 @@ object BlockRestoreData {
     var lt_time: MutableMap<Location, Long> = HashMap()
     var playerChat: MutableMap<Player, Boolean> = HashMap()
     var playerStatus: MutableMap<Player, SetupStatus> = HashMap()
-    var blocklist: MutableList<String> = ArrayList()
+    var blockList: MutableList<String> = ArrayList()
     var inputTime: Int = -1
     var inputMaterial: Material? = null
     lateinit var blockSetup: Inventory

@@ -13,7 +13,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Timer {
     private CopyOnWriteArrayList<Location> location = BlockRestoreData.INSTANCE.getLocation();
     private Map<Location, Material> lt_mr = BlockRestoreData.INSTANCE.getLt_mr();
-    private List<String> blocklist = BlockRestoreData.INSTANCE.getBlocklist();
+    private List<String> blocklist = BlockRestoreData.INSTANCE.getBlockList();
     private Map<Location, Long> lt_time = BlockRestoreData.INSTANCE.getLt_time();
 
     public void run() {
