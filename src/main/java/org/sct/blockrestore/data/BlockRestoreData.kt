@@ -20,14 +20,14 @@ object BlockRestoreData {
     var inputTime: Int = -1
     var inputMaterial: Material? = null
     lateinit var blockSetup: Inventory
-    lateinit var invmodify: Inventory
-    lateinit var inveditor: Inventory
+    lateinit var modify: Inventory
+    lateinit var overview: Inventory
 
-    fun setModify(size: Int, title: String) {
-        invmodify = Bukkit.createInventory(null, size, title)
+    fun createModify(size: Int, title: String) {
+        modify = Bukkit.createInventory(null, size, title)
     }
 
-    fun setBlockSetup(size: Int, title: String) : Inventory{
+    fun createBlockSetup(size: Int, title: String) : Inventory{
         blockSetup = Bukkit.createInventory(null, size, title)
         return blockSetup
     }

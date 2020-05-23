@@ -24,8 +24,8 @@ public class modify {
 
     public void openinv(Player player, String blockname) {//打开默认容器
         this.blockname = blockname;
-        BlockRestoreData.INSTANCE.setModify(3 * 9, "§a编辑器");
-        invmodify = BlockRestoreData.INSTANCE.getInvmodify();
+        BlockRestoreData.INSTANCE.createModify(3 * 9, "§a编辑器");
+        invmodify = BlockRestoreData.INSTANCE.getModify();
         setModify();
         ItemStack row10,row11,row12,row13,row14,row15,row16;
         if (BlockRestore.instance.getConfig().getBoolean("blocks." + blockname + ".replace")) {
@@ -66,7 +66,7 @@ public class modify {
     }
 
     public void openinv_modifyblock(Player player, String replace) {//打开修改方块类型后的容器
-        invmodify = BlockRestoreData.INSTANCE.getInvmodify();
+        invmodify = BlockRestoreData.INSTANCE.getModify();
         ItemStack it = new ItemStack(Material.getMaterial(replace));
         ItemMeta itm = it.getItemMeta();
         itm.setDisplayName("§b替换的方块类型");
@@ -76,7 +76,7 @@ public class modify {
     }
 
     public void openinv_modifytime(Player player) {//打开修改时间后的容器
-        invmodify = BlockRestoreData.INSTANCE.getInvmodify();
+        invmodify = BlockRestoreData.INSTANCE.getModify();
         ItemStack it = invmodify.getItem(15);
         ItemMeta itm = it.getItemMeta();
         time = BlockRestoreData.INSTANCE.getInputTime();
@@ -87,7 +87,7 @@ public class modify {
     }
 
     public void clean() {
-        invmodify = BlockRestoreData.INSTANCE.getInvmodify();
+        invmodify = BlockRestoreData.INSTANCE.getModify();
         invmodify = null;
     }
 

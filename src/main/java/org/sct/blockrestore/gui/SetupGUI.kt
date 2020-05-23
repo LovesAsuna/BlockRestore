@@ -6,7 +6,7 @@ import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 import org.sct.blockrestore.data.BlockRestoreData
 import org.sct.blockrestore.data.BlockRestoreData.blockSetup
-import org.sct.blockrestore.data.BlockRestoreData.setBlockSetup
+import org.sct.blockrestore.data.BlockRestoreData.createBlockSetup
 
 object SetupGUI {
     private var time = 0
@@ -19,7 +19,7 @@ object SetupGUI {
      * @param inventory 待填充的容器
      * @return void
      */
-    private fun setBlockSetup(inventory: Inventory) {
+    private fun init(inventory: Inventory) {
         val slot = intArrayOf(0, 1, 2, 3, 5, 6, 7, 8, 9, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26)
         val LIME_STAINED_GLASS_PANE = ItemStack(Material.WHITE_STAINED_GLASS_PANE)
         inventory.setItem(4, ItemStack(material))
@@ -44,8 +44,8 @@ object SetupGUI {
     fun openInventory(player: Player, type : Type) {
         when (type) {
             Type.DEFAULT -> {
-                val blockSetup = setBlockSetup(3 * 9, "§b方块设置")
-                setBlockSetup(blockSetup)
+                val blockSetup = createBlockSetup(3 * 9, "§b方块设置")
+                init(blockSetup)
                 player.openInventory(blockSetup)
             }
             Type.BLOCK_MODIFY -> {

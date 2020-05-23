@@ -12,7 +12,7 @@ import org.sct.blockrestore.data.BlockRestoreData
 import org.sct.blockrestore.data.BlockRestoreData.inputTime
 import org.sct.blockrestore.enumeration.SetupStatus
 import org.sct.blockrestore.gui.Blocks
-import org.sct.blockrestore.gui.editor
+import org.sct.blockrestore.gui.OverViewGUI
 import org.sct.blockrestore.gui.modify
 
 class InventoryClickListener : Listener {
@@ -34,7 +34,7 @@ class InventoryClickListener : Listener {
                     }
                     14 -> {
                         player.closeInventory()
-                        Bukkit.getScheduler().runTaskLater(BlockRestore.instance, Runnable { editor().openInventory(player) }, 1L)
+                        Bukkit.getScheduler().runTaskLater(BlockRestore.instance, Runnable { OverViewGUI.openInventory(player) }, 1L)
                     }
                 }
                 e.isCancelled = true

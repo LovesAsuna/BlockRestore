@@ -17,10 +17,6 @@ class BlockBreakListener : Listener {
 
     @EventHandler
     fun onBlockBreak(event: BlockBreakEvent) {
-        if (timerUtil == null) {
-            timerUtil = TimerUtil()
-            timerUtil!!.run()
-        }
         val player = event.player
         val location = event.block.location
         val material = event.block.type
