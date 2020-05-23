@@ -10,10 +10,10 @@ import org.bukkit.inventory.ItemStack
 import org.sct.blockrestore.BlockRestore
 import org.sct.blockrestore.data.BlockRestoreData
 import org.sct.blockrestore.data.BlockRestoreData.inputTime
-import org.sct.blockrestore.enumeration.SetupStatus
+import org.sct.blockrestore.enumeration.Status
 import org.sct.blockrestore.gui.Blocks
 import org.sct.blockrestore.gui.OverViewGUI
-import org.sct.blockrestore.gui.modify
+import org.sct.blockrestore.gui.ModifyGUI
 
 class InventoryClickListener : Listener {
 
@@ -27,7 +27,7 @@ class InventoryClickListener : Listener {
             title.equals("§bBlockRestore主菜单", true) -> {
                 when (e.rawSlot) {
                     13 -> {
-                        BlockRestoreData.playerStatus[player] = SetupStatus.ADDNAME
+                        BlockRestoreData.playerStatus[player] = Status.ADDNAME
                         BlockRestoreData.playerChat[player] = true
                         player.sendMessage("§7[§eBlockRestore§7]§b请输入添加物品的命名空间")
                         player.closeInventory()
@@ -45,13 +45,13 @@ class InventoryClickListener : Listener {
                 changeBlock(e)
                 when (e.rawSlot) {
                     11 -> {
-                        BlockRestoreData.playerStatus[player] = SetupStatus.REPLACENAME
+                        BlockRestoreData.playerStatus[player] = Status.REPLACENAME
                         BlockRestoreData.playerChat[player] = true
                         player.sendMessage("§7[§eBlockRestore§7]§b请输入替换物品的命名空间")
                         player.closeInventory()
                     }
                     15 -> {
-                        BlockRestoreData.playerStatus[player] = SetupStatus.RESTORETIME
+                        BlockRestoreData.playerStatus[player] = Status.RESTORETIME
                         BlockRestoreData.playerChat[player] = true
                         player.sendMessage("§7[§eBlockRestore§7]§b请输入方块恢复的时间")
                         player.closeInventory()
@@ -76,13 +76,13 @@ class InventoryClickListener : Listener {
                 changeBlock(e)
                 when (e.rawSlot) {
                     11 -> {
-                        BlockRestoreData.playerStatus[player] = SetupStatus.REPLACENAME
+                        BlockRestoreData.playerStatus[player] = Status.EDITREPLACENAME
                         BlockRestoreData.playerChat[player] = true
                         player.sendMessage("§7[§eBlockRestore§7]§b请输入替换物品的命名空间")
                         player.closeInventory()
                     }
                     15 -> {
-                        BlockRestoreData.playerStatus[e.whoClicked as Player] = SetupStatus.RESTORETIME
+                        BlockRestoreData.playerStatus[e.whoClicked as Player] = Status.EDITRESTORETIME
                         BlockRestoreData.playerChat[e.whoClicked as Player] = true
                         player.sendMessage("§7[§eBlockRestore§7]§b请输入方块恢复的时间")
                         player.closeInventory()
@@ -97,12 +97,11 @@ class InventoryClickListener : Listener {
 
             /*editor*/
             title.equals("§e方块总览", true) -> {
-                if (e.currentItem == null) return
-                if (e.currentItem!!.type != Material.REDSTONE_BLOCK) {
+                if (e.currentItem != null && e.currentItem!!.type != Material.REDSTONE_BLOCK) {
+                    player.sendMessage("set material : ${e.currentItem!!.type}")
+                    BlockRestoreData.inputMaterial = e.currentItem!!.type
                     Bukkit.getScheduler().runTaskLater(BlockRestore.instance, Runnable {
-                        val modify = modify()
-                        modify.clean()
-                        modify.openinv(player, e.currentItem!!.type.name)
+                        ModifyGUI.openInventory(player, e.currentItem!!.type, ModifyGUI.Type.DEFAULT)
                     }, 1L)
                 }
                 e.isCancelled = true

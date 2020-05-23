@@ -17,7 +17,6 @@ public class blockrestore implements CommandExecutor, TabCompleter {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (cmd.getName().equalsIgnoreCase("blockrestore")) {
             if (args.length == 1 && args[0].equalsIgnoreCase("main")) {
-                MainGUI MainGUI = new MainGUI();
                 MainGUI.openInventory((Player) sender);
                 return true;
             }

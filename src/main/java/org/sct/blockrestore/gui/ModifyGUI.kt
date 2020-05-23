@@ -1,101 +1,101 @@
-package org.sct.blockrestore.gui;
+package org.sct.blockrestore.gui
 
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.sct.blockrestore.BlockRestore;
-import org.sct.blockrestore.data.BlockRestoreData;
+import org.bukkit.Material
+import org.bukkit.entity.Player
+import org.bukkit.inventory.Inventory
+import org.bukkit.inventory.ItemStack
+import org.sct.blockrestore.BlockRestore.Companion.instance
+import org.sct.blockrestore.data.BlockRestoreData.createModify
+import org.sct.blockrestore.data.BlockRestoreData.inputTime
+import org.sct.blockrestore.data.BlockRestoreData.modify
 
-public class modify {
-    private static String blockname;
-    private Inventory invmodify;
-    private int time;
+object ModifyGUI {
+    private var time = 0
 
-    private void setModify () {//填充容器
-        int slot[] = {0, 1, 2, 3, 5, 6, 7, 8, 9, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26};
-        ItemStack LIME_STAINED_GLASS_PANE = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
-        invmodify.setItem(4, new ItemStack(Material.getMaterial(blockname)));
-        for (int Slot : slot) {
-            invmodify.setItem(Slot, LIME_STAINED_GLASS_PANE);
+    private fun init(inventory: Inventory) {
+        val slot = intArrayOf(0, 1, 2, 3, 5, 6, 7, 8, 9, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26)
+        val LIME_STAINED_GLASS_PANE = ItemStack(Material.LIME_STAINED_GLASS_PANE)
+        for (Slot in slot) {
+            inventory.setItem(Slot, LIME_STAINED_GLASS_PANE)
         }
     }
 
-    public void openinv(Player player, String blockname) {//打开默认容器
-        this.blockname = blockname;
-        BlockRestoreData.INSTANCE.createModify(3 * 9, "§a编辑器");
-        invmodify = BlockRestoreData.INSTANCE.getModify();
-        setModify();
-        ItemStack row10,row11,row12,row13,row14,row15,row16;
-        if (BlockRestore.instance.getConfig().getBoolean("blocks." + blockname + ".replace")) {
-            row10 = Blocks.LIME_WOOL.getItemStack();
-        } else {
-            row10 = Blocks.RED_WOOL.getItemStack();
+    fun openInventory(player: Player, blockMaterial: Material, type: Type) {
+        when (type) {
+            Type.DEFAULT -> {
+                val modify = createModify(3 * 9, "§a编辑器").also {
+                    it.setItem(4, ItemStack(blockMaterial))
+                }
+
+                init(modify)
+                val Replace: ItemStack
+                val ReplaceBlock: ItemStack
+                val row12: ItemStack
+                val Restore: ItemStack
+                val DirectGiveItem: ItemStack
+                val Time: ItemStack
+                val save: ItemStack
+                Replace = if (instance.config.getBoolean("Blocks.${blockMaterial.name}.Replace")) {
+                    Blocks.LIME_WOOL.itemStack
+                } else {
+                    Blocks.RED_WOOL.itemStack
+                }
+                ReplaceBlock = ItemStack(Material.getMaterial(instance.config.getString("Blocks.${blockMaterial.name}.ReplaceBlock")!!)!!)
+                row12 = if (instance.config.getBoolean("Blocks." + blockMaterial.name + "DenyPlace")) {
+                    Blocks.BARRIER.itemStack
+                } else {
+                    Blocks.GRASS_BLOCK.itemStack
+                }
+                Restore = if (instance.config.getBoolean("Blocks.${blockMaterial.name}.Restore")) {
+                    Blocks.ENCHANTING_TABLE.itemStack
+                } else {
+                    Blocks.CRAFTING_TABLE.itemStack
+                }
+                DirectGiveItem = if (instance.config.getBoolean("Blocks.${blockMaterial.name}.DirectGiveItem")) {
+                    Blocks.CHEST.itemStack
+                } else {
+                    Blocks.ENDER_CHEST.itemStack
+                }
+                Time = ItemStack(Material.REDSTONE)
+                save = Blocks.LEVER.itemStack
+                val itemMeta = Time.itemMeta
+                itemMeta!!.setDisplayName("§a恢复时长(" + instance.config.getInt("Blocks.${blockMaterial.name}.RestoreTime") + "秒)")
+                Time.itemMeta = itemMeta
+                modify.setItem(10, Replace)
+                modify.setItem(11, ReplaceBlock)
+                modify.setItem(12, row12)
+                modify.setItem(13, Restore)
+                modify.setItem(14, DirectGiveItem)
+                modify.setItem(15, Time)
+                modify.setItem(16, save)
+                player.openInventory(modify)
+            }
+            Type.BLOCK_MODIFY -> {
+                val itemStack = ItemStack(blockMaterial)
+                val itemMeta = itemStack.itemMeta
+                itemMeta!!.setDisplayName("§b替换的方块类型")
+                itemStack.itemMeta = itemMeta
+                modify.setItem(11, itemStack)
+                player.openInventory(modify)
+            }
+            Type.TIME_MODIFY -> {
+                val itemStack = modify.getItem(15)
+                val itemMeta = itemStack!!.itemMeta
+                time = inputTime
+                itemMeta!!.setDisplayName("§a恢复时长(" + time + "秒)")
+                itemStack.itemMeta = itemMeta
+                modify.setItem(15, itemStack)
+                player.openInventory(modify)
+            }
         }
-        row11 = new ItemStack(Material.getMaterial(BlockRestore.instance.getConfig().getString("blocks." + blockname + ".replaceblock")));
-        if (BlockRestore.instance.getConfig().getBoolean("blocks." + blockname + "denyplace")) {
-            row12 = Blocks.BARRIER.getItemStack();
-        } else {
-            row12 = Blocks.GRASS_BLOCK.getItemStack();
-        }
-        if (BlockRestore.instance.getConfig().getBoolean("blocks." + blockname + ".restore")) {
-            row13 = Blocks.ENCHANTING_TABLE.getItemStack();
-        } else {
-            row13 = Blocks.CRAFTING_TABLE.getItemStack();
-        }
-        if (BlockRestore.instance.getConfig().getBoolean("blocks." + blockname + ".directgiveitem")) {
-            row14 = Blocks.CHEST.getItemStack();
-        } else {
-            row14 = Blocks.ENDER_CHEST.getItemStack();
-        }
-        row15 = new ItemStack(Material.REDSTONE);
-        row16 = Blocks.LEVER.getItemStack();
-        ItemMeta row15m = row15.getItemMeta();
-        ItemMeta row16m = row16.getItemMeta();
-        row15m.setDisplayName("§a恢复时长(" + BlockRestore.instance.getConfig().getInt("blocks." + blockname + ".restoretime") + "秒)");
-        row15.setItemMeta(row15m);
-        invmodify.setItem(10,row10);
-        invmodify.setItem(11,row11);
-        invmodify.setItem(12,row12);
-        invmodify.setItem(13,row13);
-        invmodify.setItem(14,row14);
-        invmodify.setItem(15,row15);
-        invmodify.setItem(16,row16);
-        player.openInventory(invmodify);
+
     }
 
-    public void openinv_modifyblock(Player player, String replace) {//打开修改方块类型后的容器
-        invmodify = BlockRestoreData.INSTANCE.getModify();
-        ItemStack it = new ItemStack(Material.getMaterial(replace));
-        ItemMeta itm = it.getItemMeta();
-        itm.setDisplayName("§b替换的方块类型");
-        it.setItemMeta(itm);
-        invmodify.setItem(11,it);
-        player.openInventory(invmodify);
+    enum class Type {
+        DEFAULT,
+        BLOCK_MODIFY,
+        TIME_MODIFY;
     }
 
-    public void openinv_modifytime(Player player) {//打开修改时间后的容器
-        invmodify = BlockRestoreData.INSTANCE.getModify();
-        ItemStack it = invmodify.getItem(15);
-        ItemMeta itm = it.getItemMeta();
-        time = BlockRestoreData.INSTANCE.getInputTime();
-        itm.setDisplayName("§a恢复时长(" + time + "秒)");
-        it.setItemMeta(itm);
-        invmodify.setItem(15,it);
-        player.openInventory(invmodify);
-    }
 
-    public void clean() {
-        invmodify = BlockRestoreData.INSTANCE.getModify();
-        invmodify = null;
-    }
-
-    public String getBlockname() {
-        return blockname;
-    }
-
-    public void setBlockname(String blockname) {
-        this.blockname = blockname;
-    }
 }
