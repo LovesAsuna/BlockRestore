@@ -163,7 +163,7 @@ class InventoryClickListener : Listener {
 
         when (getItemMaterial(e, 12)) {
             Material.GRASS -> BlockRestore.instance.config["Blocks.$blockName.DenyPlace"] = false
-            else -> BlockRestore.instance.config["Blocks.$blockName.denyplace"] = true
+            else -> BlockRestore.instance.config["Blocks.$blockName.DenyPlace"] = true
         }
 
         when (getItemMaterial(e, 13)) {
