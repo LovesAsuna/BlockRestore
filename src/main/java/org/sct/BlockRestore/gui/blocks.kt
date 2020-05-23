@@ -20,39 +20,17 @@ enum class blocks(val itemStack: ItemStack) {
         var itemMeta = item.itemMeta
         var name: String? = null
         when (item.type) {
-            Material.RED_WOOL -> {
-                name = "§c关闭方块替换"
-            }
-            Material.STONE -> {
-                name = "§b替换的方块类型"
-            }
-            Material.GRASS_BLOCK -> {
-                name = "§b允许放置"
-            }
-            Material.ENCHANTING_TABLE -> {
-                name = "§2自动恢复"
-            }
-            Material.CHEST -> {
-                name = "§a直接给予物品"
-            }
-            Material.REDSTONE -> {
-                name = "§a恢复时长(单位:秒)"
-            }
-            Material.LEVER -> {
-                name = "§2完成设置"
-            }
-            Material.LIME_WOOL -> {
-                name = "§2开启方块替换"
-            }
-            Material.BARRIER -> {
-                name = "§c禁止放置"
-            }
-            Material.CRAFTING_TABLE -> {
-                name = "§c禁用自动恢复"
-            }
-            Material.ENDER_CHEST -> {
-                name = "§c禁用直接给予物品"
-            }
+            Material.RED_WOOL -> name = "§c关闭方块替换"
+            Material.STONE -> name = "§b替换的方块类型"
+            Material.GRASS_BLOCK -> name = "§b允许放置"
+            Material.ENCHANTING_TABLE -> name = "§2自动恢复"
+            Material.CHEST -> name = "§a直接给予物品"
+            Material.REDSTONE -> name = "§a恢复时长(单位:秒)"
+            Material.LEVER -> name = "§2完成设置"
+            Material.LIME_WOOL -> name = "§2开启方块替换"
+            Material.BARRIER -> name = "§c禁止放置"
+            Material.CRAFTING_TABLE -> name = "§c禁用自动恢复"
+            Material.ENDER_CHEST -> name = "§c禁用直接给予物品"
         }
         itemMeta?.setDisplayName(name)
         item.itemMeta = itemMeta
